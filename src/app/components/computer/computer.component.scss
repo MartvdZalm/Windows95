@@ -1,6 +1,6 @@
 @use "../../../styles/variables" as *;
 
-#ibm {
+section {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,7 +109,7 @@
                 border-radius: 15px;
             }
 
-           #ibm__frame__terminal.off {
+            #ibm__frame__terminal.off {
                 background-color: black;
                 background-image: none;
                 color: black;

@@ -1,0 +1,8 @@
+@for (line of lines(); track line) {
+<div class="terminal-line">
+  @if (line.isPrompt) {
+  <span class="prompt">{{ line.text }}</span>
+  }
+  {{ line.text }}
+</div>
+}

@@ -1,7 +1,9 @@
-<main id="ibm">
+<section id="ibm">
     <div class="ibm__frame">
         <div class="ibm__frame__screen">
-            <div id="ibm__frame__terminal" class="off"></div>
+            <div id="ibm__frame__terminal" [class.off]="power">
+                <app-terminal />
+            </div>
         </div>
         <div class="ibm__frame--lower">
             <p>|||||||||</p>
@@ -9,8 +11,8 @@
                 <img src="images/ibm-logo.png" height="35px">
             </div>
             <div class="ibm-frame-on-off-button">
-                <div class="ibm-frame-on-off-button-circle" id="power-button"></div>
+                <div class="ibm-frame-on-off-button-circle" (click)="togglePower()"></div>
             </div>
         </div> 
     </div>
-</main>
+</section>
