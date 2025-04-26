@@ -4,10 +4,11 @@ import { TerminalLine } from '../../models/terminal/terminal-line.model';
 
 @Injectable({ providedIn: 'root' })
 export class TerminalService {
-  private currentDir = 'C:';
+  public currentDir = signal<string>('C:');
   public commands = new Map<string, TerminalCommand>();
   public lines = signal<TerminalLine[]>([]);
-  public prompt = signal<string>('C:\\>');
+  public prompt = '>';
+  public ready = signal(false);
 
   public registerCommand(command: TerminalCommand): void {
     this.commands.set(command.name, command);
@@ -18,24 +19,67 @@ export class TerminalService {
     const command = this.commands.get(cmd.toLowerCase());
 
     if (!command) {
-      return `Command not recognized: ${cmd}. Type 'help' for available commands.`;
+      this.addLine(
+        `Command not recognized: ${cmd}. Type 'help' for available commands.`
+      );
+      return;
     }
 
-    return command.execute(args, this.currentDir);
+    const result = command.execute(args);
+    if (result) {
+      this.addLine(result);
+    }
   }
 
-  public addLine(text: string, isPrompt = false): void {
-    let line = '';
+  public async addLine(
+    text: string,
+    isPrompt = false,
+    delayMs = 0
+  ): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        let line = isPrompt ? this.currentDir() + this.prompt + text : text;
 
-    if (isPrompt) {
-      line = this.prompt() + text;
-    } else {
-      line = text;
-    }
-
-    this.lines().push({
-      text: line,
-      isPrompt,
+        this.lines.update((lines) => [...lines, { text: line, isPrompt }]);
+        resolve();
+      }, delayMs);
     });
+  }
+
+  public async addLinesWithDelay(
+    lines: { text: string; delay: number }[]
+  ): Promise<void> {
+    for (const line of lines) {
+      await this.addLine(line.text, false, line.delay);
+    }
+  }
+
+  public async addTypewriterLine(
+    text: string,
+    charDelay = 50,
+    lineDelay = 0
+  ): Promise<void> {
+    await new Promise((resolve) => setTimeout(resolve, lineDelay));
+
+    this.lines.update((lines) => [...lines, { text: '', isPrompt: false }]);
+
+    for (let i = 0; i < text.length; i++) {
+      const partialText = text.substring(0, i + 1);
+      this.lines.update((lines) => {
+        const newLines = [...lines];
+        newLines[newLines.length - 1] = {
+          ...newLines[newLines.length - 1],
+          text: partialText,
+        };
+        return newLines;
+      });
+      await new Promise((resolve) => setTimeout(resolve, charDelay));
+    }
+  }
+
+  public clearTerminal(): void {
+    this.lines.set([]);
+    this.currentDir.set('C:');
+    this.ready.set(false);
   }
 }

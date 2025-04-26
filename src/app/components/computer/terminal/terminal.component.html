@@ -1,11 +1,11 @@
-<section>
-  @for (line of terminalService.lines(); track line) {
-  <p class="terminal__text" style="white-space: pre-wrap">{{ line.text }}</p>
+<section class="terminal">
+  @for (line of terminalService.lines(); track $index) {
+    <p class="terminal__text">{{ line.text }}</p>
+  } @if (terminalService.ready()) {
+    <span class="prompt__line">
+      <p>{{ terminalService.currentDir() + terminalService.prompt }}</p>
+      <p style="white-space: pre-wrap">{{ inputText }}</p>
+      <p class="cursor"></p>
+    </span>
   }
-
-  <span class="prompt__line">
-    <p>{{ terminalService.prompt() }}</p>
-    <p>{{ inputText }}</p>
-    <p class="cursor"></p>
-  </span>
 </section>
