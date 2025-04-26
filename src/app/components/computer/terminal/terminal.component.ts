@@ -3,6 +3,16 @@ import { TerminalService } from '../../../services/terminal/terminal.service';
 import { ClsCommand } from '../../../services/terminal/commands/cls.command';
 import { DirCommand } from '../../../services/terminal/commands/dir.command';
 import { CdCommand } from '../../../services/terminal/commands/cd.command';
+import { VerCommand } from '../../../services/terminal/commands/ver.command';
+import { HelpCommand } from '../../../services/terminal/commands/help.command';
+import { TypeCommand } from '../../../services/terminal/commands/type.command';
+import { EditCommand } from '../../../services/terminal/commands/edit.command';
+import { MkDirCommand } from '../../../services/terminal/commands/mkdir.command';
+import { DelCommand } from '../../../services/terminal/commands/del.command';
+import { RenCommand } from '../../../services/terminal/commands/ren.command';
+import { TimeCommand } from '../../../services/terminal/commands/time.command';
+import { DateCommand } from '../../../services/terminal/commands/date.command';
+import { TreeCommand } from '../../../services/terminal/commands/tree.command';
 
 @Component({
   selector: 'app-terminal',
@@ -17,11 +27,31 @@ export class TerminalComponent implements OnInit {
   public constructor(
     clsCommand: ClsCommand,
     dirCommand: DirCommand,
-    cdCommand: CdCommand
+    cdCommand: CdCommand,
+    verCommand: VerCommand,
+    helpCommand: HelpCommand,
+    typeCommand: TypeCommand,
+    editCommand: EditCommand,
+    mkdirCommand: MkDirCommand,
+    delCommand: DelCommand,
+    renCommand: RenCommand,
+    timeCommand: TimeCommand,
+    dateCommand: DateCommand,
+    treeCommand: TreeCommand
   ) {
     this.terminalService.registerCommand(clsCommand);
     this.terminalService.registerCommand(dirCommand);
     this.terminalService.registerCommand(cdCommand);
+    this.terminalService.registerCommand(verCommand);
+    this.terminalService.registerCommand(helpCommand);
+    this.terminalService.registerCommand(typeCommand);
+    this.terminalService.registerCommand(editCommand);
+    this.terminalService.registerCommand(mkdirCommand);
+    this.terminalService.registerCommand(delCommand);
+    this.terminalService.registerCommand(renCommand);
+    this.terminalService.registerCommand(timeCommand);
+    this.terminalService.registerCommand(dateCommand);
+    this.terminalService.registerCommand(treeCommand);
   }
 
   public async ngOnInit(): Promise<void> {

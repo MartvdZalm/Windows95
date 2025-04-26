@@ -125,7 +125,7 @@ export class Folder {
       .forEach((file) => {
         const fileModifiedDate = this.formatDosDate(file.getDateModified());
         const size = this.formatFileSize(file.getSize());
-        output += formatLine(fileModifiedDate, '', size, file.getName());
+        output += formatLine(fileModifiedDate, '', size, this.formatFileName(file.getName()));
       });
 
     const totalFiles = this.files.filter(

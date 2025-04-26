@@ -100,14 +100,20 @@ export class FileSystemService {
   }
 
   public getFolderFromPath(path: string): Folder | null {
-    const folderPath = path.split('/').filter(Boolean);
-    let currentFolder = this.fileSystem;
+    const normalizedPath = path.replace(/\\/g, '/');
+    const pathParts = normalizedPath.split('/').filter(Boolean);
 
-    if (folderPath[0] === 'C:') {
-      folderPath.shift();
+    if (pathParts.length === 0) {
+      return null;
     }
 
-    for (const folder of folderPath) {
+    let currentFolder = this.fileSystem;
+
+    if (pathParts[0] === 'C:') {
+      pathParts.shift();
+    }
+
+    for (const folder of pathParts) {
       const foundFolder = currentFolder.getSubFolder(folder);
       if (!foundFolder) {
         return null;
@@ -116,6 +122,40 @@ export class FileSystemService {
     }
 
     return currentFolder;
+  }
+
+  public getFileFromPath(path: string): File | null {
+    const normalizedPath = path.replace(/\\/g, '/');
+    const pathParts = normalizedPath.split('/').filter(Boolean);
+
+    if (pathParts.length === 0) {
+      return null;
+    }
+
+    let currentFolder: Folder = this.fileSystem;
+
+    if (pathParts[0].endsWith(':')) {
+      if (pathParts[0] !== 'C:') {
+        return null;
+      }
+      pathParts.shift();
+    }
+
+    for (let i = 0; i < pathParts.length - 1; i++) {
+      const folderName = pathParts[i];
+      const nextFolder = currentFolder.getSubFolder(folderName);
+      if (!nextFolder) {
+        return null;
+      }
+      currentFolder = nextFolder;
+    }
+
+    const fileName = pathParts[pathParts.length - 1];
+    const file = currentFolder
+      .getFiles()
+      .find((f) => f.getName().toLowerCase() === fileName.toLowerCase());
+
+    return file || null;
   }
 
   public getRootFolder(): Folder {
