@@ -96,7 +96,7 @@ export class Folder {
     output += `Volume Serial Number is ${this.generateSerialNumber()}\n`;
     output += `Directory of ${this.location}\n\n`;
 
-    const padRight = (str: string, width: number) =>
+    const padRight = (str: string, width: number): string =>
       str.length >= width ? str : str + ' '.repeat(width - str.length);
 
     const formatLine = (
@@ -104,7 +104,7 @@ export class Folder {
       type: string,
       size: string,
       name: string
-    ) => {
+    ): string => {
       return `${padRight(date, 20)}${type}${padRight(size, 20)}${name}\n`;
     };
 

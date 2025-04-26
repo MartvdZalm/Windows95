@@ -18,7 +18,7 @@ export class TerminalService {
     const [cmd, ...args] = input.trim().split(' ');
     const command = this.commands.get(cmd.toLowerCase());
 
-    const addInputLine = (cmd: string) => {
+    const addInputLine = (cmd: string): void => {
       const savedDir = this.currentDir();
       this.addLine(cmd, true, 0, savedDir);
     };
@@ -50,8 +50,7 @@ export class TerminalService {
   ): Promise<void> {
     return new Promise((resolve) => {
       setTimeout(() => {
-        let line = isPrompt ? (savedDir || this.currentDir()) + this.prompt + text : text;
-
+        const line = isPrompt ? (savedDir || this.currentDir()) + this.prompt + text : text;
         this.lines.update((lines) => [...lines, { text: line, isPrompt }]);
         resolve();
       }, delayMs);
