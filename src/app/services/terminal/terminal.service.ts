@@ -18,11 +18,22 @@ export class TerminalService {
     const [cmd, ...args] = input.trim().split(' ');
     const command = this.commands.get(cmd.toLowerCase());
 
+    const addInputLine = (cmd: string) => {
+      const savedDir = this.currentDir();
+      this.addLine(cmd, true, 0, savedDir);
+    };
+
     if (!command) {
+      addInputLine(input);
+
       this.addLine(
         `Command not recognized: ${cmd}. Type 'help' for available commands.`
       );
       return;
+    }
+
+    if (command!.name !== 'cls') {
+      addInputLine(input);
     }
 
     const result = command.execute(args);
@@ -34,11 +45,12 @@ export class TerminalService {
   public async addLine(
     text: string,
     isPrompt = false,
-    delayMs = 0
+    delayMs = 0,
+    savedDir?: string,
   ): Promise<void> {
     return new Promise((resolve) => {
       setTimeout(() => {
-        let line = isPrompt ? this.currentDir() + this.prompt + text : text;
+        let line = isPrompt ? (savedDir || this.currentDir()) + this.prompt + text : text;
 
         this.lines.update((lines) => [...lines, { text: line, isPrompt }]);
         resolve();

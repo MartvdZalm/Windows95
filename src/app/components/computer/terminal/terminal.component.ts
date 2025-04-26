@@ -88,7 +88,6 @@ export class TerminalComponent implements OnInit {
     event.preventDefault();
 
     if (event.key === 'Enter') {
-      this.terminalService.addLine(this.inputText, true);
       this.terminalService.execute(this.inputText);
       this.inputText = '';
       this.scrollToBottom();
