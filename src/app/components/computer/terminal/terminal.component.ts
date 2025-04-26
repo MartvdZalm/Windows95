@@ -13,6 +13,7 @@ import { RenCommand } from '../../../services/terminal/commands/ren.command';
 import { TimeCommand } from '../../../services/terminal/commands/time.command';
 import { DateCommand } from '../../../services/terminal/commands/date.command';
 import { TreeCommand } from '../../../services/terminal/commands/tree.command';
+import { HistoryCommand } from '../../../services/terminal/commands/history.command';
 
 @Component({
   selector: 'app-terminal',
@@ -37,7 +38,8 @@ export class TerminalComponent implements OnInit {
     renCommand: RenCommand,
     timeCommand: TimeCommand,
     dateCommand: DateCommand,
-    treeCommand: TreeCommand
+    treeCommand: TreeCommand,
+    historyCommand: HistoryCommand
   ) {
     this.terminalService.registerCommand(clsCommand);
     this.terminalService.registerCommand(dirCommand);
@@ -52,6 +54,7 @@ export class TerminalComponent implements OnInit {
     this.terminalService.registerCommand(timeCommand);
     this.terminalService.registerCommand(dateCommand);
     this.terminalService.registerCommand(treeCommand);
+    this.terminalService.registerCommand(historyCommand);
   }
 
   public async ngOnInit(): Promise<void> {
@@ -113,11 +116,26 @@ export class TerminalComponent implements OnInit {
 
   @HostListener('window:keydown', ['$event'])
   public handleKeyboardEvent(event: KeyboardEvent): void {
-    if (!this.terminalService.ready()) return;
+    if (!this.terminalService.ready()) {
+      return;
+    }
 
     event.preventDefault();
 
+    if (event.key === 'ArrowUp') {
+      const prevCmd = this.terminalService.getPreviousCommand();
+      if (prevCmd !== null) {
+        this.inputText = prevCmd;
+      }
+      return;
+    } else if (event.key === 'ArrowDown') {
+      const nextCmd = this.terminalService.getNextCommand();
+      this.inputText = nextCmd !== null ? nextCmd : '';
+      return;
+    }
+
     if (event.key === 'Enter') {
+      this.terminalService.addToHistory(this.inputText);
       this.terminalService.execute(this.inputText);
       this.inputText = '';
       this.scrollToBottom();

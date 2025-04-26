@@ -4,11 +4,51 @@ import { TerminalLine } from '../../models/terminal/terminal-line.model';
 
 @Injectable({ providedIn: 'root' })
 export class TerminalService {
+  private commandHistory: string[] = [];
+  private historyIndex = -1;
+  private maxHistorySize = 50;
+
   public currentDir = signal<string>('C:');
   public commands = new Map<string, TerminalCommand>();
   public lines = signal<TerminalLine[]>([]);
   public prompt = '>';
   public ready = signal(false);
+
+  public addToHistory(command: string): void {
+    if (
+      command.trim() &&
+      command !== this.commandHistory[this.commandHistory.length - 1]
+    ) {
+      this.commandHistory.push(command);
+      if (this.commandHistory.length > this.maxHistorySize) {
+        this.commandHistory.shift();
+      }
+    }
+    this.historyIndex = this.commandHistory.length;
+  }
+
+  public getPreviousCommand(): string | null {
+    if (this.commandHistory.length === 0) {
+      return null;
+    }
+    this.historyIndex = Math.max(0, this.historyIndex - 1);
+    return this.commandHistory[this.historyIndex];
+  }
+
+  public getNextCommand(): string | null {
+    if (this.commandHistory.length === 0) return null;
+    this.historyIndex = Math.min(
+      this.commandHistory.length,
+      this.historyIndex + 1
+    );
+    return this.historyIndex < this.commandHistory.length
+      ? this.commandHistory[this.historyIndex]
+      : '';
+  }
+
+  public getCommandHistory(): string[] {
+    return [...this.commandHistory];
+  }
 
   public registerCommand(command: TerminalCommand): void {
     this.commands.set(command.name, command);
@@ -46,11 +86,13 @@ export class TerminalService {
     text: string,
     isPrompt = false,
     delayMs = 0,
-    savedDir?: string,
+    savedDir?: string
   ): Promise<void> {
     return new Promise((resolve) => {
       setTimeout(() => {
-        const line = isPrompt ? (savedDir || this.currentDir()) + this.prompt + text : text;
+        const line = isPrompt
+          ? (savedDir || this.currentDir()) + this.prompt + text
+          : text;
         this.lines.update((lines) => [...lines, { text: line, isPrompt }]);
         resolve();
       }, delayMs);
