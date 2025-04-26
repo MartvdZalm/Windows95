@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { CommandResult, TerminalCommand } from '../../../models/terminal-command.model';
-import { FileSystemService } from '../../file-system.service';
+import { TerminalCommand } from '../../../models/terminal/terminal-command.model';
+import { FileSystemService } from '../filesystem.service';
 
 @Injectable({ providedIn: 'root' })
 export class CdCommand implements TerminalCommand {
@@ -8,19 +8,16 @@ export class CdCommand implements TerminalCommand {
   name = 'cd';
   description = 'Change directory';
 
-  execute(args: string[], currentDir: string): CommandResult {
+  public execute(args: string[], currentDir: string): string {
     if (!args[0]) {
-      return { output: `Current directory: ${currentDir}` };
+      return `Current directory: ${currentDir}`;
     }
 
     const newDir = this.changeDirectory(args[0], currentDir);
     if (newDir) {
-      return {
-        output: `Changed directory to ${newDir}`,
-        newDir: newDir,
-      };
+      return `Changed directory to ${newDir}`;
     }
-    return { output: `Directory not found: ${args[0]}` };
+    return `Directory not found: ${args[0]}`;
   }
 
   private changeDirectory(path: string, currentDir: string): string | null {

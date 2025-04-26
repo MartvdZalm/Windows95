@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { TerminalCommand } from '../../../models/terminal-command.model';
-import { FileSystemService } from '../../file-system.service';
+import { TerminalCommand } from '../../../models/terminal/terminal-command.model';
+import { FileSystemService } from '../filesystem.service';
 
 @Injectable({ providedIn: 'root' })
 export class DirCommand implements TerminalCommand {
@@ -8,12 +8,12 @@ export class DirCommand implements TerminalCommand {
   public name = 'dir';
   public description = 'List directory contents';
 
-  public execute(args: string[], currentDir: string): { output: string } {
-    const folder = this.fileSystemService.getFolderFromPath(args[0] || currentDir);
-    return {
-      output: folder
-        ? folder.displayContents()
-        : `Directory not found: ${args[0]}`,
-    };
+  public execute(args: string[], currentDir: string): string {
+    const folder = this.fileSystemService.getFolderFromPath(
+      args[0] || currentDir
+    );
+    return folder
+      ? folder.displayContents()
+      : `Directory not found: ${args[0]}`;
   }
 }

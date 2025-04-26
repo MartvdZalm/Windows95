@@ -1,41 +1,50 @@
-import { Component, input } from '@angular/core';
-import { TerminalInputComponent } from './terminal-input/terminal-input.component';
-import { TerminalOutputComponent } from './terminal-output/terminal-output.component';
-import { TerminalLine } from '../../../models/terminal-line.model';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
+import { TerminalLine } from '../../../models/terminal/terminal-line.model';
+import { TerminalService } from '../../../services/terminal/terminal.service';
+import { ClsCommand } from '../../../services/terminal/commands/cls.command';
+import { DirCommand } from '../../../services/terminal/commands/dir.command';
 
 @Component({
   selector: 'app-terminal',
-  imports: [TerminalInputComponent, TerminalOutputComponent],
+  imports: [],
   templateUrl: './terminal.component.html',
-  styleUrl: './terminal.component.scss'
+  styleUrl: './terminal.component.scss',
 })
-export class TerminalComponent {
-  // outputLines: TerminalLine[] = [];
-  // currentDir = 'C:\\';
+export class TerminalComponent implements OnInit {
+  public terminalService = inject(TerminalService);
+  public inputText = '';
 
-  // constructor() {
-  //   this.addOutput('Microsoft Windows [Version 10.0.19042.1237]', false);
-  //   this.addOutput('(c) Microsoft Corporation. All rights reserved.', false);
-  //   this.addOutput('', true);
-  // }
+  constructor(
+    clsCommand: ClsCommand,
+    dirCommand: DirCommand
+  ) {
+    this.terminalService.registerCommand(clsCommand);
+    this.terminalService.registerCommand(dirCommand);
+  }
 
-  // onCommandEntered(command: string): void {
-  //   // this.addOutput(command, true);
-    
-  //   // const result = this.terminalService.execute(command);
-  //   // this.addOutput(result.output, false);
-    
-  //   // // if (result.newDir) {
-  //   // //   this.currentDir = result.newDir;
-  //   // // }
-    
-  //   // this.addOutput('', true); // New prompt
-  // }
+  public ngOnInit(): void {
+    this.terminalService.addLine('Microsoft Windows [Version 10.0.19042.1237]');
+    this.terminalService.addLine('(c) Microsoft Corporation. All rights reserved.');
+    this.terminalService.addLine('');
+  }
 
-  // private addOutput(text: string, isPrompt: boolean): void {
-  //   this.outputLines.push({
-  //     text,
-  //     isPrompt,
-  //   });
-  // }
+  @HostListener('window:keydown', ['$event'])
+  public handleKeyboardEvent(event: KeyboardEvent): void {
+    event.preventDefault();
+
+    if (event.key === 'Enter') {
+      this.terminalService.addLine(this.inputText, true);
+
+      const result = this.terminalService.execute(this.inputText);
+      if (result) {
+        this.terminalService.addLine(result);
+
+      }
+      this.inputText = '';
+    } else if (event.key === 'Backspace') {
+      this.inputText = this.inputText.slice(0, -1);
+    } else if (event.key.length === 1 && !event.ctrlKey && !event.metaKey) {
+      this.inputText += event.key;
+    }
+  }
 }

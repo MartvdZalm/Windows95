@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { File } from '../models/file.model';
-import { Folder } from '../models/folder.model';
+import { File } from '../../models/file.model';
+import { Folder } from '../../models/folder.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,7 @@ import { Folder } from '../models/folder.model';
 export class FileSystemService {
   private fileSystem: Folder = new Folder().setName('C:').setLocation('C:/');
 
-  constructor() {
+  public constructor() {
     this.initializeFileSystem();
   }
 

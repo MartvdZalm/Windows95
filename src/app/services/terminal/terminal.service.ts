@@ -1,48 +1,41 @@
-import { inject, Injectable } from '@angular/core';
-import { FileSystemService } from '../file-system.service';
-import { TerminalCommand } from '../../models/terminal-command.model';
-import { DirCommand } from './commands/dir.command';
-import { CdCommand } from './commands/cd.command';
+import { Injectable, signal } from '@angular/core';
+import { TerminalCommand } from '../../models/terminal/terminal-command.model';
+import { TerminalLine } from '../../models/terminal/terminal-line.model';
 
 @Injectable({ providedIn: 'root' })
 export class TerminalService {
-  private fileSystemService = inject(FileSystemService);
-  public currentDir = 'C:';
-  public prompt = '>';
+  private currentDir = 'C:';
   public commands = new Map<string, TerminalCommand>();
+  public lines = signal<TerminalLine[]>([]);
+  public prompt = signal<string>('C:\\>');
 
-  constructor(private dirCommand: DirCommand, private cdCommand: CdCommand) {
-    this.registerCommands();
+  public registerCommand(command: TerminalCommand): void {
+    this.commands.set(command.name, command);
   }
 
-  private registerCommands(): void {
-    this.commands.set(this.dirCommand.name, this.dirCommand);
-    this.commands.set(this.cdCommand.name, this.cdCommand);
-  }
-
-  async execute(input: string): Promise<{ output: string; clear?: boolean }> {
+  public execute(input: string): string | void {
     const [cmd, ...args] = input.trim().split(' ');
     const command = this.commands.get(cmd.toLowerCase());
 
     if (!command) {
-      return {
-        output: `Command not recognized: ${cmd}. Type 'help' for available commands.`,
-      };
+      return `Command not recognized: ${cmd}. Type 'help' for available commands.`;
     }
 
-    const result = await command.execute(args, this.currentDir);
-
-    if (result.newDir) {
-      this.currentDir = result.newDir;
-    }
-
-    return {
-      output: result.output,
-      clear: command.name === 'cls',
-    };
+    return command.execute(args, this.currentDir);
   }
 
-  public getAvailableCommands(): TerminalCommand[] {
-    return Array.from(this.commands.values());
+  public addLine(text: string, isPrompt = false): void {
+    let line = '';
+
+    if (isPrompt) {
+      line = this.prompt() + text;
+    } else {
+      line = text;
+    }
+
+    this.lines().push({
+      text: line,
+      isPrompt,
+    });
   }
 }

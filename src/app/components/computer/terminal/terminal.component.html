@@ -1,2 +1,11 @@
-<!-- <app-terminal-output />
-<app-terminal-input /> -->
+<section>
+  @for (line of terminalService.lines(); track line) {
+  <p class="terminal__text" style="white-space: pre-wrap">{{ line.text }}</p>
+  }
+
+  <span class="prompt__line">
+    <p>{{ terminalService.prompt() }}</p>
+    <p>{{ inputText }}</p>
+    <p class="cursor"></p>
+  </span>
+</section>
