@@ -14,6 +14,7 @@ import { TimeCommand } from '../../../services/terminal/commands/time.command';
 import { DateCommand } from '../../../services/terminal/commands/date.command';
 import { TreeCommand } from '../../../services/terminal/commands/tree.command';
 import { HistoryCommand } from '../../../services/terminal/commands/history.command';
+import { WinCommand } from '../../../services/terminal/commands/win.command';
 
 @Component({
   selector: 'app-terminal',
@@ -39,7 +40,8 @@ export class TerminalComponent implements OnInit {
     timeCommand: TimeCommand,
     dateCommand: DateCommand,
     treeCommand: TreeCommand,
-    historyCommand: HistoryCommand
+    historyCommand: HistoryCommand,
+    winCommand: WinCommand
   ) {
     this.terminalService.registerCommand(clsCommand);
     this.terminalService.registerCommand(dirCommand);
@@ -55,6 +57,7 @@ export class TerminalComponent implements OnInit {
     this.terminalService.registerCommand(dateCommand);
     this.terminalService.registerCommand(treeCommand);
     this.terminalService.registerCommand(historyCommand);
+    this.terminalService.registerCommand(winCommand);
   }
 
   public async ngOnInit(): Promise<void> {
