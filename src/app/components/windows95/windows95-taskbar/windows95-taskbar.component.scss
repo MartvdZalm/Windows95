@@ -14,6 +14,19 @@
     height: 100%;
   }
 
+  .taskbar__item--window {
+    @include windows95-border(white, white, black, black, 2px, 3px);
+    height: 40px;
+    margin-left: 5px;
+    padding: 0 5px;
+    color: black;
+    cursor: pointer;
+
+    &.active {
+      @include windows95-border(black, black, white, white);
+    }
+  }
+
   .taskbar--start {
     margin-left: 5px;
 

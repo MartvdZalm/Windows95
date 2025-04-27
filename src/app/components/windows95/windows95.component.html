@@ -1,4 +1,22 @@
 <main id="windows95">
   <app-windows95-desktop />
   <app-windows95-taskbar />
+
+  @for (window of windowService.windowsList(); track window.instanceId) {
+    @if (!window.minimized) {
+      <app-windows95-window [windowId]="window.instanceId">
+        @switch (window.id) {
+          @case ('ie') {
+            <app-internet-explorer />
+          }
+          @case ('my-computer') {
+            <app-my-computer />
+          }
+          @case ('recycle-bin') {
+            <app-recycle-bin />
+          }
+        }
+      </app-windows95-window>
+    }
+  }
 </main>

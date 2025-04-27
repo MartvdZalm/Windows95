@@ -31,4 +31,10 @@ export class ComputerComponent {
       this.terminalService.clearTerminal();
     }
   }
+
+  public onKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.togglePower();
+    }
+  }
 }

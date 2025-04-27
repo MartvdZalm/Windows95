@@ -1,4 +1,10 @@
-<li class="taskbar__menu__item">
+<li
+  class="taskbar__menu__item"
+  (click)="$event.stopPropagation(); toggleSubMenu(startMenuItem())"
+  (keydown)="onKeyDown($event)"
+  tabindex="0"
+  role="menuitem"
+>
   <img
     class="taskbar__menu__icon"
     [src]="startMenuItem().icon"
@@ -11,9 +17,15 @@
   @if (startMenuItem().submenu.length > 0) {
     <div class="taskbar__menu__arrowright"></div>
 
-    <ul class="taskbar__menu__sub">
+    <ul
+      class="taskbar__menu__sub"
+      [class.active]="activeMenuItem === startMenuItem()"
+    >
       @for (subStartMenuItem of startMenuItem().submenu; track $index) {
-        <app-windows95-taskbar-start-menu-item [startMenuItem]="subStartMenuItem" />
+        <app-windows95-taskbar-start-menu-item
+          [startMenuItem]="subStartMenuItem"
+          (click)="$event.stopPropagation()"
+        />
       }
     </ul>
   }

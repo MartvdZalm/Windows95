@@ -8,7 +8,7 @@ import { Windows95DesktopShortcutComponent } from './windows95-desktop-shortcut/
   styleUrl: './windows95-desktop.component.scss'
 })
 export class Windows95DesktopComponent {
-  shortcuts = [
+  public shortcuts = [
     { 
       name: 'My Computer', 
       icon: 'images/windows95/windows95-my-computer.ico',

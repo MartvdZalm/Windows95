@@ -6,9 +6,21 @@ import { Injectable } from '@angular/core';
 export class AudioService {
   private audioContext: AudioContext;
 
-  constructor() {
-    this.audioContext = new (window.AudioContext ||
-      (window as any).webkitAudioContext)();
+  // public constructor() {
+  //   this.audioContext = new (window.AudioContext ||
+  //     (window as any).webkitAudioContext)();
+  // }
+
+  public constructor() {
+    // Type the `window` object more specifically, as `window` can be any object in TypeScript.
+    const audioContextConstructor = window.AudioContext || (window as { webkitAudioContext?: AudioContext }).webkitAudioContext;
+    
+    // Now safely create an AudioContext instance.
+    if (audioContextConstructor) {
+      this.audioContext = new audioContextConstructor();
+    } else {
+      throw new Error("AudioContext not supported in this browser.");
+    }
   }
 
   public async playSound(url: string): Promise<void> {

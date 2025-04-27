@@ -1,0 +1,151 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: $windows95-gray-color;
+  top: 50px;
+  left: 200px;
+  resize: none;
+  overflow: hidden;
+  @include windows95-border(white, white, black, black, 2px, 3px);
+
+  .window__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #000082;
+    height: fit-content;
+
+    .window__header__title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 30px;
+
+      .window__header__icon {
+        height: 20px;
+        margin: 0 5px;
+      }
+
+      .window__header__title-item {
+        display: flex;
+        align-items: center;
+      }
+
+      .window__x__btn,
+      .window__underline__btn {
+        cursor: pointer;
+        background-color: $windows95-gray-color;
+        @include windows95-border(white, white, black, black);
+        color: black;
+        position: relative;
+        transition: top 0.1s ease, left 0.1s ease;
+
+        &:active {
+          @include windows95-border(black, black, white, white, 3px, 2px);
+        }
+      }
+    }
+
+    .window__header__menu {
+      width: 100%;
+      background-color: #c0c0c0;
+      padding: 5px;
+
+      .window__header__menu-item {
+        margin-right: 10px;
+        cursor: pointer;
+        color: black;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .window__section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.resize-handle {
+  position: absolute;
+  background: transparent;
+  z-index: 10;
+
+  &-n {
+    top: 0;
+    left: 5px;
+    right: 5px;
+    height: 5px;
+    cursor: n-resize;
+  }
+
+  &-e {
+    top: 5px;
+    right: 0;
+    bottom: 5px;
+    width: 5px;
+    cursor: e-resize;
+  }
+
+  &-s {
+    bottom: 0;
+    left: 5px;
+    right: 5px;
+    height: 5px;
+    cursor: s-resize;
+  }
+
+  &-w {
+    top: 5px;
+    left: 0;
+    bottom: 5px;
+    width: 5px;
+    cursor: w-resize;
+  }
+
+  &-ne {
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    cursor: ne-resize;
+  }
+
+  &-nw {
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    cursor: nw-resize;
+  }
+
+  &-se {
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    cursor: se-resize;
+  }
+
+  &-sw {
+    bottom: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    cursor: sw-resize;
+  }
+}

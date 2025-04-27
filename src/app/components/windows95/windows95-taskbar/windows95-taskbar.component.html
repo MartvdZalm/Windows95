@@ -17,6 +17,24 @@
     }
   </div>
 
+  @for (item of taskbarService.taskbarItemsList(); track item.instanceId) {
+    <div
+      class="taskbar__item taskbar__item--window"
+      [class.active]="item.isActive"
+      (click)="onTaskbarItemClick(item.instanceId)"
+      (keydown)="onTaskbarItemKeyDown($event, item.instanceId)"
+      tabindex="0"
+      role="button"
+    >
+      <img
+        class="taskbar__item-icon"
+        [src]="'assets/images/windows95/' + item.icon"
+        [alt]="item.title"
+      />
+      <span class="taskbar__item-text">{{ item.title }}</span>
+    </div>
+  }
+
   <div class="taskbar__item taskbar--clock">
     <p class="taskbar__time">17:48</p>
   </div>

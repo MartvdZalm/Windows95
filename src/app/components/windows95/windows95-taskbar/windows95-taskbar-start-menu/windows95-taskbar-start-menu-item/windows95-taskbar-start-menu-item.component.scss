@@ -50,15 +50,19 @@
 }
 
 .taskbar__menu__sub {
-	position: absolute;
-	display: block; 
-	left: 98%;
-	top: -1px;
-	background: #c3c6cd;
-	width: 250px;                
-	padding: 5px;
-	z-index: 10;
-	overflow: visible;
+  position: absolute;
+  display: none;
+  left: 98%;
+  top: -1px;
+  background: #c3c6cd;
+  width: 250px;
+  padding: 5px;
+  z-index: 10;
+  overflow: visible;
 
-	@include windows95-border(white, white, black, black);
+  @include windows95-border(white, white, black, black);
+}
+
+.taskbar__menu__sub.active {
+  display: block;
 }

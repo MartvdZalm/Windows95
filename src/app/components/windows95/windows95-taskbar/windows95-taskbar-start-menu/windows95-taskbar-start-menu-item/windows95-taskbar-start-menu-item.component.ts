@@ -5,8 +5,19 @@ import { StartMenuItem } from '../../../../../models/windows95/start-menu-item.m
   selector: 'app-windows95-taskbar-start-menu-item',
   imports: [],
   templateUrl: './windows95-taskbar-start-menu-item.component.html',
-  styleUrl: './windows95-taskbar-start-menu-item.component.scss'
+  styleUrl: './windows95-taskbar-start-menu-item.component.scss',
 })
 export class Windows95TaskbarStartMenuItemComponent {
   public startMenuItem = input.required<StartMenuItem>();
+  public activeMenuItem: StartMenuItem | null = null;
+
+  public toggleSubMenu(item: StartMenuItem): void {
+    this.activeMenuItem = this.activeMenuItem === item ? null : item;
+  }
+
+  public onKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.toggleSubMenu(this.startMenuItem());
+    }
+  }
 }

@@ -14,7 +14,7 @@ export class Windows95BootComponent implements OnInit {
   public isVisible = false;
   public progress = 0;
 
-  async ngOnInit(): Promise<void> {
+  public async ngOnInit(): Promise<void> {
     await this.playBootSequence();
     this.router.navigate(['/']);
   }

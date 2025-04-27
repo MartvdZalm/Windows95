@@ -18,6 +18,10 @@
         <div
           class="ibm-frame-on-off-button-circle"
           (click)="togglePower()"
+          (keydown)="onKeyDown($event)"
+          tabindex="0"
+          role="button"
+          aria-label="Toggle Power"
         ></div>
       </div>
     </div>
