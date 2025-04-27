@@ -1,0 +1,9 @@
+@use "../../../styles/variables" as *;
+
+#windows95 {
+  font-family: $windows95-font-family;
+  color: white;
+  width: 100vw;
+  height: 100vh;
+  background: $windows95-desktop-background-color;
+}

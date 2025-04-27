@@ -1,0 +1,64 @@
+@use "../../../../../../styles/variables" as *;
+@use "../../../../../../styles/mixins" as *;
+
+.taskbar__menu__item {
+  width: 100%;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $windows95-dark-blue-color;
+
+    > .taskbar__menu__title,
+    > .taskbar__menu__title .text__underline {
+      color: white;
+    }
+
+    > .taskbar__menu__arrowright {
+      @include windows95-menu-arrow(white);
+    }
+  }
+
+  .text__underline {
+    cursor: pointer;
+  }
+
+  .taskbar__menu__icon {
+    width: 70px;
+    height: 60px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 2px;
+    cursor: pointer;
+  }
+
+  .taskbar__menu__title {
+    font-size: 18px;
+    color: black;
+    cursor: pointer;
+  }
+
+  .taskbar__menu__arrowright {
+    @include windows95-menu-arrow(black);
+    margin-left: auto;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+}
+
+.taskbar__menu__sub {
+	position: absolute;
+	display: block; 
+	left: 98%;
+	top: -1px;
+	background: #c3c6cd;
+	width: 250px;                
+	padding: 5px;
+	z-index: 10;
+	overflow: visible;
+
+	@include windows95-border(white, white, black, black);
+}

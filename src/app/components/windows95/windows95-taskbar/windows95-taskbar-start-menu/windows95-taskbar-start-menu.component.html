@@ -1,0 +1,11 @@
+<div class="taskbar__menu">
+  <div class="taskbar__menu__side">
+    <p class="taskbar__side__text taskbar__side__ninefive">95</p>
+    <p class="taskbar__side__text taskbar__side__windows">Windows</p>
+  </div>
+  <ul class="taskbar__menu__list">
+    @for (startMenuItem of startMenuItems; track $index) {
+      <app-windows95-taskbar-start-menu-item [startMenuItem]="(startMenuItem)" />
+    }
+  </ul>
+</div>

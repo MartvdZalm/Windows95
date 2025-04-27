@@ -1,0 +1,6 @@
+@use "../../../../styles/variables" as *;
+
+.desktop {
+  position: relative;
+  height: calc(100vh - $windows95-taskbar-height);
+}

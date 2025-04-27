@@ -1,0 +1,5 @@
+<section class="desktop">
+  @for (shortcut of shortcuts; track $index) {
+    <app-windows95-desktop-shortcut [icon]="shortcut.icon" [name]="shortcut.name" />
+  }
+</section>

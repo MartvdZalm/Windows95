@@ -1,0 +1,61 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.taskbar {
+  display: flex;
+  height: $windows95-taskbar-height;
+  background-color: $windows95-gray-color;
+  border-top: 2px solid white;
+  align-items: center;
+
+  .taskbar__item {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .taskbar--start {
+    margin-left: 5px;
+
+    .checked {
+      @include windows95-border(black, black, white, white, 3px, 2px);
+    }
+  }
+
+  .taskbar--clock {
+    margin-left: auto;
+    margin-right: 5px;
+
+    .taskbar__time {
+      padding: 8px;
+      font-size: 1.3em;
+      color: black;
+      @include windows95-border(gray, gray, white, white);
+    }
+  }
+
+  .taskbar__btn {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 80%;
+
+    @include windows95-border(white, white, black, black, 2px, 3px);
+
+    .taskbar__btn__text {
+      color: black;
+      font-size: 1.7em;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: $windows95-font-family;
+    }
+
+    .taskbar__btn__img {
+      height: 45px;
+      width: 45px;
+      cursor: pointer;
+    }
+  }
+}

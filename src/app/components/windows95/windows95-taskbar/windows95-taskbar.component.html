@@ -1,0 +1,23 @@
+<section class="taskbar">
+  <div class="taskbar__item taskbar--start">
+    <button
+      (click)="toggleStartMenu()"
+      class="taskbar__btn taskbar__btn--start"
+    >
+      <img
+        class="taskbar__btn__img"
+        src="images/windows95/windows95-start.ico"
+        alt="Start"
+      />
+      <p class="taskbar__btn__text">Start</p>
+    </button>
+
+    @if (startMenuOpen) {
+      <app-windows95-taskbar-start-menu />
+    }
+  </div>
+
+  <div class="taskbar__item taskbar--clock">
+    <p class="taskbar__time">17:48</p>
+  </div>
+</section>

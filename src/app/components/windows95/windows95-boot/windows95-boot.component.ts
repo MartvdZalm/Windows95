@@ -1,14 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AudioService } from '../../services/audio.service';
+import { AudioService } from '../../../services/audio.service';
 
 @Component({
-  selector: 'app-win95-boot-screen',
+  selector: 'app-windows95-boot',
   imports: [],
-  templateUrl: './win95-boot-screen.component.html',
-  styleUrl: './win95-boot-screen.component.scss',
+  templateUrl: './windows95-boot.component.html',
+  styleUrl: './windows95-boot.component.scss',
 })
-export class Win95BootScreenComponent implements OnInit {
+export class Windows95BootComponent implements OnInit {
   private audioService = inject(AudioService);
   private router = inject(Router);
   public isVisible = false;

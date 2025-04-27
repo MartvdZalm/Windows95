@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { DesktopComponent } from './components/desktop.component';
 import { ComputerComponent } from './components/computer/computer.component';
-import { Win95BootScreenComponent } from './components/win95-boot-screen/win95-boot-screen.component';
+import { Windows95BootComponent } from './components/windows95/windows95-boot/windows95-boot.component';
+import { Windows95Component } from './components/windows95/windows95.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: DesktopComponent,
+    component: Windows95Component,
   },
   {
     path: 'computer',
@@ -14,6 +14,6 @@ export const routes: Routes = [
   },
   {
     path: 'boot',
-    component: Win95BootScreenComponent,
+    component: Windows95BootComponent,
   }
 ];
