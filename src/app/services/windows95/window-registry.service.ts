@@ -16,7 +16,7 @@ export class WindowRegistryService {
       {
         id: WindowIds.INTERNET_EXPLORER,
         title: 'Internet Explorer',
-        icon: 'assets/icons/ie.png',
+        icon: 'images/windows95/windows95-ie-5.ico',
         component: InternetExplorerComponent,
         type: WindowType.APPLICATION,
         defaultWidth: 900,

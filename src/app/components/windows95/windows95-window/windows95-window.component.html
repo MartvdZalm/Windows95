@@ -14,7 +14,7 @@
           @if (win.definition.icon) {
             <img
               class="window__header__icon"
-              [src]="'assets/images/windows95/' + win.definition.icon"
+              [src]="win.definition.icon"
               [alt]="win.id"
             />
           }
@@ -22,9 +22,10 @@
         </span>
         <span>
           @if (win.definition.type === windowType.APPLICATION) {
-            <button class="window__underline__btn" (click)="onMinimize()">_</button>
+            <button class="window__minimize__btn" (click)="onMinimize()">_</button>
+            <button class="window__maximize__btn" (click)="onMaximize()">{{ win.maximized ? '▭' : '□' }}</button>
           }
-          <button class="window__x__btn" (click)="onClose()">X</button>
+          <button class="window__close__btn" (click)="onClose()">X</button>
         </span>
       </div>
 

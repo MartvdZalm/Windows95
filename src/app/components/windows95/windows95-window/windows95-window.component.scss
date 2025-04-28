@@ -38,8 +38,9 @@
         align-items: center;
       }
 
-      .window__x__btn,
-      .window__underline__btn {
+      .window__close__btn,
+      .window__minimize__btn,
+      .window__maximize__btn {
         cursor: pointer;
         background-color: $windows95-gray-color;
         @include windows95-border(white, white, black, black);
@@ -71,10 +72,6 @@
   }
 
   .window__section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     height: 100%;
   }

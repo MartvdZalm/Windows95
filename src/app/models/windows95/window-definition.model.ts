@@ -5,7 +5,7 @@ export interface WindowDefinition {
   id: string;
   title: string;
   icon: string;
-  component: Type<Component>;
+  component: Type<any>;
   type: WindowType;
   defaultWidth: number;
   defaultHeight: number;

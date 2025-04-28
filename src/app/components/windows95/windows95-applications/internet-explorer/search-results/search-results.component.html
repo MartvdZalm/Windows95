@@ -1,0 +1,26 @@
+<div class="search-results">
+  <div class="search-results__header">
+    <div class="search-results__icon">
+      <img src="images/windows95/windows95-ie-5-google-logo.png" alt="Search results">
+    </div>
+    <h2 class="search-results__title">Search Results</h2>
+  </div>
+
+  <div class="search-results__count">
+    Found {{ searchResults().length }} results
+  </div>
+
+  <ul class="search-results__list">
+    @for (result of searchResults(); track result.websiteId) {
+      <li class="search-results__item">
+        <a class="search-results__link" (click)="setWebsite(result.url)" target="_blank">
+          <img class="search-results__favicon" [src]="result.icon" alt="">
+          <div class="search-results__content">
+            <h3 class="search-results__name">{{ result.title }}</h3>
+            <div class="search-results__url">{{ result.url }}</div>
+          </div>
+        </a>
+      </li>
+    }
+  </ul>
+</div>

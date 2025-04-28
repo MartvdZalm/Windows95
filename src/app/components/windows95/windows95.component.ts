@@ -25,6 +25,5 @@ export class Windows95Component implements OnInit {
 
   public ngOnInit(): void {
     this.windowService.createWindow('ie');
-    this.windowService.createWindow('ie');
   }
 }
