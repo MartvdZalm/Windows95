@@ -22,6 +22,11 @@
     color: black;
     cursor: pointer;
 
+    .taskbar__item-icon {
+      width: 25px;
+      margin-right: 5px;
+    }
+
     &.active {
       @include windows95-border(black, black, white, white);
     }

@@ -29,7 +29,7 @@ export class WindowRegistryService {
       {
         id: WindowIds.RECYCLE_BIN,
         title: 'Recycle Bin',
-        icon: 'assets/icons/recycle-bin.png',
+        icon: '',
         component: RecycleBinComponent,
         type: WindowType.APPLICATION,
         defaultWidth: 650,
@@ -41,7 +41,7 @@ export class WindowRegistryService {
       {
         id: WindowIds.MY_COMPUTER,
         title: 'My Computer',
-        icon: 'assets/icons/my-computer.png',
+        icon: '',
         component: MyComputerComponent,
         type: WindowType.APPLICATION,
         defaultWidth: 800,
@@ -53,7 +53,7 @@ export class WindowRegistryService {
       {
         id: WindowIds.NOTEPAD,
         title: 'Notepad',
-        icon: '',
+        icon: 'images/windows95/windows95-notepad.ico',
         component: NotepadComponent,
         type: WindowType.APPLICATION,
         defaultWidth: 800,

@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-windows95-taskbar-item',
   imports: [],
   templateUrl: './windows95-taskbar-item.component.html',
-  styleUrl: './windows95-taskbar-item.component.scss'
+  styleUrl: './windows95-taskbar-item.component.scss',
 })
-export class Windows95TaskbarItemComponent {
-
-}
+export class Windows95TaskbarItemComponent {}
