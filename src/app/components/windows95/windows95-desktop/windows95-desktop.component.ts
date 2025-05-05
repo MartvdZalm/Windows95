@@ -5,25 +5,29 @@ import { Windows95DesktopShortcutComponent } from './windows95-desktop-shortcut/
   selector: 'app-windows95-desktop',
   imports: [Windows95DesktopShortcutComponent],
   templateUrl: './windows95-desktop.component.html',
-  styleUrl: './windows95-desktop.component.scss'
+  styleUrl: './windows95-desktop.component.scss',
 })
 export class Windows95DesktopComponent {
   public shortcuts = [
-    { 
-      name: 'My Computer', 
+    {
+      name: 'My Computer',
       icon: 'images/windows95/windows95-my-computer.ico',
+      window: '',
     },
     {
       name: 'Inbox',
-      icon: 'images/windows95/windows95-mailbox.ico'
+      icon: 'images/windows95/windows95-mailbox.ico',
+      window: '',
     },
     {
       name: 'Internet Explorer',
       icon: 'images/windows95/windows95-ie-5-shortcut.ico',
+      window: 'ie',
     },
     {
       name: 'Recycle Bin',
-      icon: 'images/windows95/windows95-recycle-bin-empty.ico'
-    }
+      icon: 'images/windows95/windows95-recycle-bin-empty.ico',
+      window: '',
+    },
   ];
 }

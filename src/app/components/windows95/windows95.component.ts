@@ -6,6 +6,9 @@ import { WindowService } from '../../services/windows95/window.service';
 import { InternetExplorerComponent } from './windows95-applications/internet-explorer/internet-explorer.component';
 import { MyComputerComponent } from './windows95-applications/my-computer/my-computer.component';
 import { RecycleBinComponent } from './windows95-applications/recycle-bin/recycle-bin.component';
+import { BrowserService } from '../../services/windows95/windows95-applications/internet-explorer/browser.service';
+import { WindowIds } from '../../models/windows95/window-ids.model';
+import { NotepadComponent } from './windows95-applications/notepad/notepad.component';
 
 @Component({
   selector: 'app-windows95',
@@ -16,14 +19,17 @@ import { RecycleBinComponent } from './windows95-applications/recycle-bin/recycl
     InternetExplorerComponent,
     MyComputerComponent,
     RecycleBinComponent,
+    NotepadComponent
   ],
   templateUrl: './windows95.component.html',
   styleUrl: './windows95.component.scss',
 })
 export class Windows95Component implements OnInit {
   public windowService = inject(WindowService);
+  private browserService = inject(BrowserService);
 
   public ngOnInit(): void {
-    this.windowService.createWindow('ie');
+    this.windowService.createWindow(WindowIds.NOTEPAD);
+    // this.browserService.navigate('https://aboutme.com');
   }
 }

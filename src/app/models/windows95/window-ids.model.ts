@@ -3,5 +3,4 @@ export enum WindowIds {
   RECYCLE_BIN = 'recycle-bin',
   MY_COMPUTER = 'my-computer',
   NOTEPAD = 'notepad',
-  MEDIA_PLAYER = 'media-player',
 }

@@ -5,6 +5,7 @@ import { InternetExplorerComponent } from '../../components/windows95/windows95-
 import { RecycleBinComponent } from '../../components/windows95/windows95-applications/recycle-bin/recycle-bin.component';
 import { MyComputerComponent } from '../../components/windows95/windows95-applications/my-computer/my-computer.component';
 import { WindowIds } from '../../models/windows95/window-ids.model';
+import { NotepadComponent } from '../../components/windows95/windows95-applications/notepad/notepad.component';
 
 @Injectable({
   providedIn: 'root',
@@ -45,6 +46,18 @@ export class WindowRegistryService {
         type: WindowType.APPLICATION,
         defaultWidth: 800,
         defaultHeight: 550,
+      },
+    ],
+    [
+      WindowIds.NOTEPAD,
+      {
+        id: WindowIds.NOTEPAD,
+        title: 'Notepad',
+        icon: '',
+        component: NotepadComponent,
+        type: WindowType.APPLICATION,
+        defaultWidth: 800,
+        defaultHeight: 850,
       },
     ],
   ]);

@@ -36,7 +36,7 @@ export class WindowService {
       zIndex: this.maxZIndex() + 1,
       minimized: false,
       maximized: false,
-      position: this.getInitialPosition(),
+      position: this.getInitialPosition(definition.defaultWidth, definition.defaultHeight),
       size: {
         width: definition.defaultWidth,
         height: definition.defaultHeight,
@@ -134,10 +134,16 @@ export class WindowService {
     return this.windows().filter((w) => w.id === typeId);
   }
 
-  private getInitialPosition(): { x: number; y: number } {
+  private getInitialPosition(width: number, height: number): { x: number; y: number } {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    const centerX = Math.max(0, (screenWidth - width) / 2);
+    const centerY = Math.max(0, (screenHeight - height) / 2) - 30;
+
     const lastWindow = this.windows()[this.windows().length - 1];
     return lastWindow
       ? { x: lastWindow.position.x + 30, y: lastWindow.position.y + 30 }
-      : { x: 100, y: 100 };
+      : { x: centerX, y: centerY };
   }
 }

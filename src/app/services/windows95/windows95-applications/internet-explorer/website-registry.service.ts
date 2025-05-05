@@ -2,6 +2,7 @@ import { Injectable, Type } from '@angular/core';
 import { WebsiteDefinition } from '../../../../models/windows95/windows95-applications/internet-explorer/website-definition.model';
 import { GeoCitiesWebsiteComponent } from '../../../../components/windows95/windows95-applications/internet-explorer/geo-cities-website/geo-cities-website.component';
 import { SearchResult } from '../../../../models/windows95/windows95-applications/internet-explorer/search-result.model';
+import { AboutMeComponent } from '../../../../components/windows95/windows95-applications/internet-explorer/about-me/about-me.component';
 
 @Injectable({ providedIn: 'root' })
 export class WebsiteRegistryService {
@@ -15,6 +16,17 @@ export class WebsiteRegistryService {
         component: GeoCitiesWebsiteComponent,
         defaultUrl: 'https://geocities.com',
         matches: (url: string) => url.includes('geocities.com'),
+      },
+    ],
+    [
+      'aboutme',
+      {
+        id: 'aboutme',
+        title: 'About Me',
+        icon: '',
+        component: AboutMeComponent,
+        defaultUrl: 'https://aboutme.com',
+        matches: (url: string) => url.includes('aboutme.com'),
       },
     ],
   ]);
