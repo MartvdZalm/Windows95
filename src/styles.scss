@@ -1,25 +1,9 @@
 @use "styles/variables" as *;
 @use "styles/fonts" as *;
 
-
-// *, *:before, *:after {
-// 	cursor: default;
-// 	image-rendering: pixelated;
-// 	box-sizing: border-box;
-// 	// font-family: variables.$font-family-1;
-// 	// font-size: variables.$font-size-base;
-// 	// color: variables.$text-color;
-// 	margin: 0;
-// 	overflow: hidden;
-// }
-
 * {
 	cursor: default;
 	image-rendering: pixelated;
 	box-sizing: border-box;
-	// font-family: variables.$font-family-1;
-	// font-size: variables.$font-size-base;
-	// color: variables.$text-color;
 	margin: 0;
-	overflow: hidden;
 }

@@ -12,6 +12,13 @@
   overflow: hidden;
   @include windows95-border(white, white, black, black, 2px, 3px);
 
+  @include mobile-tablet {
+    top: 0px !important;
+    left: 0px !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
   .window__header {
     display: flex;
     flex-direction: column;

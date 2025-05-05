@@ -5,6 +5,7 @@
   width: 100%;
   color: #000;
   font-family: 'Courier New', Courier, 'Lucida Console', monospace;
+  overflow-y: auto;
 
   &__menu {
     display: flex;
@@ -51,7 +52,7 @@
         margin-bottom: 8px;
 
         &__bar {
-          height: 16px;
+          height: 20px;
           width: 100%;
           background: #c0c0c0;
           border: 2px solid;
@@ -66,20 +67,19 @@
       }
 
       .experience {
-        display: flex;
-        margin-bottom: 20px;
         padding: 10px;
         background: #f0f0f0;
         border: 2px solid;
         border-color: #ffffff #808080 #808080 #ffffff;
-        box-shadow: inset -1px -1px 0 #808080, inset 1px 1px 0 #ffffff;
       
+        h4 {
+          font-size: 1.1rem;
+        }
+
         .year {
-          width: 120px;
           font-weight: bold;
           color: #000080;
-          padding-right: 15px;
-          flex-shrink: 0;
+          margin: 6px 0;
         }
       
         .details {

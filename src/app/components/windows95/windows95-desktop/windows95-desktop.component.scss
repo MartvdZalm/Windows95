@@ -2,5 +2,8 @@
 
 .desktop {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   height: calc(100vh - $windows95-taskbar-height);
 }
