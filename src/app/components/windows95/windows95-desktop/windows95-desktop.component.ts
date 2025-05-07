@@ -44,6 +44,11 @@ export class Windows95DesktopComponent implements OnInit {
       icon: 'images/windows95/windows95-recycle-bin-empty.ico',
       window: '',
     },
+    {
+      name: 'Notepad',
+      icon: 'images/windows95/windows95-notepad.ico',
+      window: 'notepad',
+    },
   ];
 
   public ngOnInit(): void {
