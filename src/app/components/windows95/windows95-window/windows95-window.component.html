@@ -1,50 +1,53 @@
 @if (window(); as win) {
-  <div
-    class="window"
-    [class.active]="isActive()"
-    [style.left.px]="win.position.x"
-    [style.top.px]="win.position.y"
-    [style.width.px]="win.size.width"
-    [style.height.px]="win.size.height"
-    [style.z-index]="win.zIndex"
-  >
-    <header class="window__header" (mousedown)="onHeaderMouseDown($event)">
-      <div class="window__header__title">
-        <span class="window__header__title-item">
-          @if (win.definition.icon) {
-            <img
-              class="window__header__icon"
-              [src]="win.definition.icon"
-              [alt]="win.id"
-            />
-          }
-          {{ win.definition.title }}
-        </span>
-        <span>
-          @if (win.definition.type === windowType.APPLICATION) {
-            <button class="window__minimize__btn" (click)="onMinimize()">_</button>
-            <button class="window__maximize__btn" (click)="onMaximize()">{{ win.maximized ? '▭' : '□' }}</button>
-          }
-          <button class="window__close__btn" (click)="onClose()">X</button>
-        </span>
+<div
+  class="window"
+  [class.active]="isActive()"
+  [style.left.px]="win.position.x"
+  [style.top.px]="win.position.y"
+  [style.width.px]="win.size.width"
+  [style.height.px]="win.size.height"
+  [style.z-index]="win.zIndex"
+>
+  <header class="window__header" (mousedown)="onHeaderMouseDown($event)">
+    <div class="window__header__title">
+      <span class="window__header__title-item">
+        @if (win.definition.icon) {
+          <img
+            class="window__header__icon"
+            [src]="win.definition.icon"
+            [alt]="win.id"
+          />
+        }
+        {{ win.definition.title }}
+      </span>
+      <span>
+        @if (win.definition.type === windowType.APPLICATION) {
+          <button class="window__minimize__btn" (click)="onMinimize()">_</button>
+          <button class="window__maximize__btn" (click)="onMaximize()">
+            {{ win.maximized ? "▭" : "□" }}
+          </button>
+        }
+        <button class="window__close__btn" (click)="onClose()">X</button>
+      </span>
+    </div>
+
+    @if (win.definition.type === windowType.APPLICATION) {
+      <div class="window__header__menu">
+        <span class="window__header__menu-item">File</span>
+        <span class="window__header__menu-item">Edit</span>
+        <span class="window__header__menu-item">View</span>
+        <span class="window__header__menu-item">Favorites</span>
+        <span class="window__header__menu-item">Tools</span>
+        <span class="window__header__menu-item">Help</span>
       </div>
+    }
+  </header>
 
-      @if (win.definition.type === windowType.APPLICATION) {
-        <div class="window__header__menu">
-          <span class="window__header__menu-item">File</span>
-          <span class="window__header__menu-item">Edit</span>
-          <span class="window__header__menu-item">View</span>
-          <span class="window__header__menu-item">Favorites</span>
-          <span class="window__header__menu-item">Tools</span>
-          <span class="window__header__menu-item">Help</span>
-        </div>
-      }
-    </header>
+  <section class="window__section">
+    <ng-content></ng-content>
+  </section>
 
-    <section class="window__section">
-      <ng-content></ng-content>
-    </section>
-
+  @if (win.definition.type === windowType.APPLICATION) {
     <div
       class="resize-handle resize-handle-n"
       (mousedown)="startResize($event, 'n')"
@@ -77,5 +80,6 @@
       class="resize-handle resize-handle-sw"
       (mousedown)="startResize($event, 'sw')"
     ></div>
-  </div>
+  }
+</div>
 }

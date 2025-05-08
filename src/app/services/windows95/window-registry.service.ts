@@ -6,6 +6,7 @@ import { RecycleBinComponent } from '../../components/windows95/windows95-applic
 import { MyComputerComponent } from '../../components/windows95/windows95-applications/my-computer/my-computer.component';
 import { WindowIds } from '../../models/windows95/window-ids.model';
 import { NotepadComponent } from '../../components/windows95/windows95-applications/notepad/notepad.component';
+import { ShutdownComponent } from '../../components/windows95/windows95-dialogs/shutdown/shutdown.component';
 
 @Injectable({
   providedIn: 'root',
@@ -60,6 +61,18 @@ export class WindowRegistryService {
         defaultHeight: 850,
       },
     ],
+    [
+      WindowIds.SHUTDOWN,
+      {
+        id: WindowIds.SHUTDOWN,
+        title: 'Shutdown',
+        icon: '',
+        component: ShutdownComponent,
+        type: WindowType.DIALOG,
+        defaultWidth: 500,
+        defaultHeight: 300,
+      }
+    ]
   ]);
 
   public getWindowDefinition(typeId: string): WindowDefinition {

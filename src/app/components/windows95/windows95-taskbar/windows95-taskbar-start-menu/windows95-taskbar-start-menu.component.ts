@@ -13,14 +13,17 @@ export class Windows95TaskbarStartMenuComponent {
     {
       icon: 'images/windows95/windows95-programs.ico',
       title: 'Programs',
+      window: '',
       submenu: [
         {
           icon: 'images/windows95/windows95-programs.ico',
           title: 'Accessories',
+          window: '',
           submenu: [
             {
               icon: 'images/windows95/windows95-programs.ico',
               title: 'Accessories',
+              window: '',
               submenu: [],
             },
           ],
@@ -28,11 +31,13 @@ export class Windows95TaskbarStartMenuComponent {
         {
           icon: 'images/windows95/windows95-programs.ico',
           title: 'StartUp',
+          window: '',
           submenu: [],
         },
         {
           icon: 'images/windows95/windows95-programs.ico',
           title: 'MS-DOS Prompt',
+          window: '',
           submenu: [],
         },
       ],
@@ -40,31 +45,37 @@ export class Windows95TaskbarStartMenuComponent {
     {
       icon: 'images/windows95/windows95-documents.ico',
       title: 'Documents',
+      window: '',
       submenu: [],
     },
     {
       icon: 'images/windows95/windows95-settings.ico',
       title: 'Settings',
+      window: '',
       submenu: [],
     },
     {
       icon: 'images/windows95/windows95-find.ico',
       title: 'Find',
+      window: '',
       submenu: [],
     },
     {
       icon: 'images/windows95/windows95-help.ico',
       title: 'Help',
+      window: '',
       submenu: [],
     },
     {
       icon: 'images/windows95/windows95-run.ico',
       title: 'Run...',
+      window: '',
       submenu: [],
     },
     {
       icon: 'images/windows95/windows95-shutdown.ico',
       title: 'Shut Down...',
+      window: 'shutdown',
       submenu: [],
     },
   ];

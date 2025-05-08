@@ -53,8 +53,29 @@ export class Windows95WindowComponent {
   @HostListener('document:mousemove', ['$event'])
   public onDocumentMouseMove(event: MouseEvent): void {
     if (this.isDragging) {
-      const newX = event.clientX - this.dragStart.offsetX;
-      const newY = event.clientY - this.dragStart.offsetY;
+      const win = this.window();
+      if (!win) {
+        return;
+      }
+
+      let newX = event.clientX - this.dragStart.offsetX;
+      let newY = event.clientY - this.dragStart.offsetY;
+
+      const maxX = window.innerWidth;
+      const maxY = window.innerHeight;
+
+      if (event.clientX < 0) {
+        newX = 0;
+      } else if (event.clientX > maxX) {
+        newX = maxX - win.size.width;
+      }
+
+      if (event.clientY < 0) {
+        newY = 0;
+      } else if (event.clientY > maxY) {
+        newY = maxY - win.size.height;
+      }
+
       this.windowService.updateWindowPosition(this.windowId(), {
         x: newX,
         y: newY,

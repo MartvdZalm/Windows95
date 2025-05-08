@@ -1,6 +1,6 @@
 <li
   class="taskbar__menu__item"
-  (click)="$event.stopPropagation(); toggleSubMenu(startMenuItem())"
+  (click)="$event.stopPropagation(); toggleSubMenu(startMenuItem()); openWindow(startMenuItem().window)"
   (keydown)="onKeyDown($event)"
   tabindex="0"
   role="menuitem"

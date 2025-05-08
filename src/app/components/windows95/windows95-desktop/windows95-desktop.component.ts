@@ -7,6 +7,7 @@ import { InternetExplorerComponent } from '../windows95-applications/internet-ex
 import { MyComputerComponent } from '../windows95-applications/my-computer/my-computer.component';
 import { RecycleBinComponent } from '../windows95-applications/recycle-bin/recycle-bin.component';
 import { NotepadComponent } from '../windows95-applications/notepad/notepad.component';
+import { ShutdownComponent } from '../windows95-dialogs/shutdown/shutdown.component';
 
 @Component({
   selector: 'app-windows95-desktop',
@@ -17,6 +18,7 @@ import { NotepadComponent } from '../windows95-applications/notepad/notepad.comp
     MyComputerComponent,
     RecycleBinComponent,
     NotepadComponent,
+    ShutdownComponent
   ],
   templateUrl: './windows95-desktop.component.html',
   styleUrl: './windows95-desktop.component.scss',

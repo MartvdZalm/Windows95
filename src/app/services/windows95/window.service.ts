@@ -15,11 +15,11 @@ export class WindowService {
 
   public readonly windowsList = this.windows.asReadonly();
   public readonly activeWindowId$ = this.activeWindowId.asReadonly();
-  
+
   public readonly maxZIndex = computed(() =>
     this.windows().reduce((max, w) => Math.max(max, w.zIndex), 0)
   );
-  
+
   public readonly activeWindow = computed(() => {
     const activeId = this.activeWindowId();
     return activeId ? this.getWindowByInstanceId(activeId) : null;
@@ -36,7 +36,10 @@ export class WindowService {
       zIndex: this.maxZIndex() + 1,
       minimized: false,
       maximized: false,
-      position: this.getInitialPosition(definition.defaultWidth, definition.defaultHeight),
+      position: this.getInitialPosition(
+        definition.defaultWidth,
+        definition.defaultHeight
+      ),
       size: {
         width: definition.defaultWidth,
         height: definition.defaultHeight,
@@ -57,6 +60,14 @@ export class WindowService {
     if (this.activeWindowId() === instanceId) {
       this.activeWindowId.set(null);
     }
+  }
+
+  public closeAllWindows(): void {
+    this.windows().forEach((window) => {
+      this.windowEvents.emitWindowClosed(window.instanceId);
+    });
+    this.windows.set([]);
+    this.activeWindowId.set(null);
   }
 
   public setActiveWindow(instanceId: string): void {
@@ -134,7 +145,10 @@ export class WindowService {
     return this.windows().filter((w) => w.id === typeId);
   }
 
-  private getInitialPosition(width: number, height: number): { x: number; y: number } {
+  private getInitialPosition(
+    width: number,
+    height: number
+  ): { x: number; y: number } {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
 
