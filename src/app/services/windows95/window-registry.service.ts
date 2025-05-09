@@ -57,8 +57,8 @@ export class WindowRegistryService {
         icon: 'images/windows95/windows95-notepad.ico',
         component: NotepadComponent,
         type: WindowType.APPLICATION,
-        defaultWidth: 800,
-        defaultHeight: 850,
+        defaultWidth: 700,
+        defaultHeight: 650,
       },
     ],
     [
@@ -71,8 +71,8 @@ export class WindowRegistryService {
         type: WindowType.DIALOG,
         defaultWidth: 500,
         defaultHeight: 300,
-      }
-    ]
+      },
+    ],
   ]);
 
   public getWindowDefinition(typeId: string): WindowDefinition {
