@@ -5,5 +5,6 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  height: calc(100vh - $windows95-taskbar-height);
+  height: 100vh;
+  padding-bottom: $windows95-taskbar-height;
 }
