@@ -1,0 +1,47 @@
+<div id="welcome-popup" class="welcome-content">
+  <div class="welcome-icon">
+    <img src="images/windows95/windows95-welcome.png" alt="Windows 95 Logo" />
+  </div>
+
+  <div class="welcome-message">
+    <h1>Welcome to Windows 95</h1>
+
+    <p>
+      Thanks for checking out my website! This is a fully functional Windows 95
+      experience built with Angular. Here's how to navigate:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Notepad</strong> - Contains my full portfolio with skills,
+        experience, and projects (mobile-friendly)
+      </li>
+      <li>
+        <strong>Terminal</strong> - Try the shutdown sequence to access a
+        command-line interface
+      </li>
+      <li>
+        <strong>Desktop Icons</strong> - Explore various aspects of Windows 95
+      </li>
+    </ul>
+
+    <div class="compatibility-note">
+      <strong>Note:</strong> Most features are designed for larger screens
+      (laptops/desktops). For mobile users, the portfolio in Notepad is fully
+      accessible, but other interactive elements may not work as intended on
+      small screens.
+    </div>
+
+    <div class="dont-show-again">
+      <label class="win95-checkbox">
+        <input type="checkbox" [(ngModel)]="dontShowAgain" />
+        <span class="checkmark"></span>
+        Don't show this message again
+      </label>
+    </div>
+
+    <div class="action-buttons">
+      <button class="win95-button" (click)="onOkClick()">OK</button>
+    </div>
+  </div>
+</div>

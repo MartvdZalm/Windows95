@@ -7,6 +7,7 @@ import { MyComputerComponent } from '../../components/windows95/windows95-applic
 import { WindowIds } from '../../models/windows95/window-ids.model';
 import { NotepadComponent } from '../../components/windows95/windows95-applications/notepad/notepad.component';
 import { ShutdownComponent } from '../../components/windows95/windows95-dialogs/shutdown/shutdown.component';
+import { WelcomeComponent } from '../../components/windows95/windows95-dialogs/welcome/welcome.component';
 
 @Injectable({
   providedIn: 'root',
@@ -71,6 +72,18 @@ export class WindowRegistryService {
         type: WindowType.DIALOG,
         defaultWidth: 500,
         defaultHeight: 300,
+      },
+    ],
+    [
+      WindowIds.WELCOME,
+      {
+        id: WindowIds.WELCOME,
+        title: 'Welcome',
+        icon: '',
+        component: WelcomeComponent,
+        type: WindowType.DIALOG,
+        defaultWidth: 650,
+        defaultHeight: 450,
       },
     ],
   ]);

@@ -8,6 +8,8 @@ import { MyComputerComponent } from '../windows95-applications/my-computer/my-co
 import { RecycleBinComponent } from '../windows95-applications/recycle-bin/recycle-bin.component';
 import { NotepadComponent } from '../windows95-applications/notepad/notepad.component';
 import { ShutdownComponent } from '../windows95-dialogs/shutdown/shutdown.component';
+import { WelcomeComponent } from '../windows95-dialogs/welcome/welcome.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-windows95-desktop',
@@ -18,18 +20,20 @@ import { ShutdownComponent } from '../windows95-dialogs/shutdown/shutdown.compon
     MyComputerComponent,
     RecycleBinComponent,
     NotepadComponent,
-    ShutdownComponent
+    ShutdownComponent,
+    WelcomeComponent,
   ],
   templateUrl: './windows95-desktop.component.html',
   styleUrl: './windows95-desktop.component.scss',
 })
 export class Windows95DesktopComponent implements OnInit {
+  private cookieService = inject(CookieService);
   public windowService = inject(WindowService);
   public shortcuts = [
     {
       name: 'My Computer',
       icon: 'images/windows95/windows95-my-computer.ico',
-      window: '',
+      window: 'my-computer',
     },
     {
       name: 'Inbox',
@@ -54,6 +58,9 @@ export class Windows95DesktopComponent implements OnInit {
   ];
 
   public ngOnInit(): void {
-    this.windowService.createWindow(WindowIds.NOTEPAD);
+    const hideWelcome = this.cookieService.get('hideWelcome');
+    if (hideWelcome !== 'true') {
+      this.windowService.createWindow(WindowIds.WELCOME);
+    }
   }
 }

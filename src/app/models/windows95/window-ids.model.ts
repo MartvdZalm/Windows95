@@ -4,4 +4,5 @@ export enum WindowIds {
   MY_COMPUTER = 'my-computer',
   NOTEPAD = 'notepad',
   SHUTDOWN = 'shutdown',
+  WELCOME = 'welcome',
 }
