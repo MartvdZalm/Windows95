@@ -1,0 +1,54 @@
+@use "../../../../../../styles/variables" as *;
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  background-color: #c0c0c0;
+  border-bottom: 1px solid #808080;
+  gap: 8px;
+
+  section {
+    display: flex;
+    gap: 2px;
+    padding: 0 4px;
+    border-right: 1px solid #808080;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border: 1px solid #c0c0c0;
+    background-color: #c0c0c0;
+    cursor: pointer;
+    min-height: 22px;
+    font-family: $windows95-font-family;
+    font-size: 16px;
+
+    img {
+     height: 20px;
+     width: 20px;
+    }
+
+    &:hover {
+      border-color: #808080;
+      background-color: #d4d4d4;
+    }
+
+    &:active {
+      border-color: #808080;
+      background-color: #a0a0a0;
+    }
+
+    &.active {
+      border-color: #808080;
+      background-color: #a0a0a0;
+    }
+  }
+}

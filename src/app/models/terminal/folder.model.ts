@@ -3,6 +3,7 @@ import { File } from './file.model';
 export class Folder {
   private name = '';
   private location = '';
+  private icon = 'images/windows95/windows95-folder.ico';
   private dateCreated: Date = new Date();
   private dateModified: Date = new Date();
   private dateAccessed: Date = new Date();
@@ -25,6 +26,15 @@ export class Folder {
 
   public getLocation(): string {
     return this.location;
+  }
+
+  public setIcon(icon: string): this {
+    this.icon = icon;
+    return this;
+  }
+
+  public getIcon(): string {
+    return this.icon;
   }
 
   public setDateCreated(dateCreated: Date | string): this {
@@ -87,7 +97,7 @@ export class Folder {
     this.dateModified = new Date();
   }
 
-  public getFolderSize(): number {
+  public getSize(): number {
     return this.files.reduce((total, file) => total + file.getSize(), 0);
   }
 
@@ -125,7 +135,12 @@ export class Folder {
       .forEach((file) => {
         const fileModifiedDate = this.formatDosDate(file.getDateModified());
         const size = this.formatFileSize(file.getSize());
-        output += formatLine(fileModifiedDate, '', size, this.formatFileName(file.getName()));
+        output += formatLine(
+          fileModifiedDate,
+          '',
+          size,
+          this.formatFileName(file.getName())
+        );
       });
 
     const totalFiles = this.files.filter(
@@ -136,8 +151,12 @@ export class Folder {
       .reduce((sum, file) => sum + file.getSize(), 0);
     const freeSpace = this.calculateFreeSpace();
 
-    output += `\n        ${totalFiles} file(s)      ${this.formatNumberWithCommas(totalFileSize)} bytes\n`;
-    output += `        ${this.subfolders.length} dir(s)       ${this.formatNumberWithCommas(freeSpace)} bytes free\n`;
+    output += `\n        ${totalFiles} file(s)      ${this.formatNumberWithCommas(
+      totalFileSize
+    )} bytes\n`;
+    output += `        ${
+      this.subfolders.length
+    } dir(s)       ${this.formatNumberWithCommas(freeSpace)} bytes free\n`;
 
     return output;
   }
@@ -208,7 +227,7 @@ export class Folder {
   private calculateFreeSpace(): number {
     const usedSpace =
       this.files.reduce((sum, file) => sum + file.getSize(), 0) +
-      this.subfolders.reduce((sum, folder) => sum + folder.getFolderSize(), 0);
+      this.subfolders.reduce((sum, folder) => sum + folder.getSize(), 0);
     return Math.max(0, 2147483648 - usedSpace);
   }
 }

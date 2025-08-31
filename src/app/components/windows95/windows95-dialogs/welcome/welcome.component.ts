@@ -15,12 +15,12 @@ export class WelcomeComponent implements OnInit {
   protected dontShowAgain = false;
   private cookieService = inject(CookieService);
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     const hideWelcome = this.cookieService.get('hideWelcome');
     this.showWelcome = hideWelcome !== 'true';
   }
 
-  public onOkClick() {
+  public onOkClick(): void {
     const activeWindowId = this.windowService.activeWindow()?.instanceId;
     if (activeWindowId) {
       this.windowService.closeWindow(activeWindowId);

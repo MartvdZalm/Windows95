@@ -1,3 +1,5 @@
+import { FILE_ASSOCIATIONS } from './file-associations';
+
 export interface FileAttributes {
   hidden?: boolean;
   readOnly?: boolean;
@@ -10,6 +12,7 @@ export class File {
   private extension = '';
   private location = '';
   private size = 0;
+  private icon = '';
   private dateCreated: Date = new Date();
   private dateModified: Date = new Date();
   private dateAccessed: Date = new Date();
@@ -17,6 +20,16 @@ export class File {
 
   public setName(name: string): this {
     this.name = name;
+    const parts = name.split('.');
+    if (parts.length > 1) {
+      this.extension = parts.pop()!.toLowerCase();
+    }
+
+    const assoc =
+      FILE_ASSOCIATIONS[this.extension] || FILE_ASSOCIATIONS['default'];
+    if (!this.icon) {
+      this.icon = assoc.icon;
+    }
     return this;
   }
 
@@ -49,6 +62,15 @@ export class File {
 
   public getSize(): number {
     return this.size;
+  }
+
+  public setIcon(icon: string): this {
+    this.icon = icon;
+    return this;
+  }
+
+  public getIcon(): string {
+    return this.icon;
   }
 
   public setDateCreated(dateCreated: Date | string): this {

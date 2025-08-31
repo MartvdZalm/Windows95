@@ -1,164 +1,223 @@
 import { Injectable } from '@angular/core';
 import { File } from '../../models/terminal/file.model';
 import { Folder } from '../../models/terminal/folder.model';
+import { Drive } from '../../models/terminal/drive.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FileSystemService {
-  private fileSystem: Folder = new Folder().setName('C:').setLocation('C:/');
+  private drives: Drive[] = [];
 
   public constructor() {
-    this.initializeFileSystem();
+    const cDrive = new Drive(
+      'C:',
+      'Local Disk (C:)',
+      'local',
+      10737418240,
+      8589934592,
+      'images/windows95/windows95-my-computer.ico'
+    );
+
+    this.initializeCDrive(cDrive);
+    this.drives.push(cDrive);
+
+    const dDrive = new Drive(
+      'D:',
+      'CD-ROM Drive (D:)',
+      'removable',
+      0,
+      0,
+      'images/windows95/windows95-cd-drive.ico'
+    );
+    this.drives.push(dDrive);
   }
 
-  private initializeFileSystem(): void {
-    const autoexec = new File()
-      .setName('AUTOEXEC.BAT')
-      .setAttributes({ hidden: true })
-      .setSize(1024);
-    const configSys = new File()
-      .setName('CONFIG.SYS')
-      .setAttributes({ hidden: true })
-      .setSize(2048);
-    const commandCom = new File().setName('COMMAND.COM').setSize(5120);
-    const ioSys = new File()
-      .setName('IO.SYS')
-      .setAttributes({ hidden: true })
-      .setSize(4096);
-    const msDosSys = new File()
-      .setName('MSDOS.SYS')
-      .setAttributes({ hidden: true })
-      .setSize(4096);
+  public getDrives(): Drive[] {
+    return this.drives;
+  }
 
-    const dosFolder = new Folder().setName('DOS').setLocation('C:/DOS');
-    dosFolder.addFile(new File().setName('EDIT.COM').setSize(1024));
-    dosFolder.addFile(new File().setName('FORMAT.COM').setSize(1024));
-    dosFolder.addFile(new File().setName('FDISK.EXE').setSize(1024));
-    dosFolder.addFile(new File().setName('XCOPY.EXE').setSize(1024));
-    dosFolder.addFile(new File().setName('MORE.COM').setSize(1024));
-
-    const windowsFolder = new Folder()
-      .setName('WINDOWS')
-      .setLocation('C:/WINDOWS');
-    const systemFolder = new Folder()
-      .setName('SYSTEM')
-      .setLocation('C:/WINDOWS/SYSTEM');
-    systemFolder.addFile(new File().setName('KERNEL32.DLL').setSize(2048));
-    systemFolder.addFile(new File().setName('USER.EXE').setSize(2048));
-    systemFolder.addFile(new File().setName('GDI.EXE').setSize(2048));
-    systemFolder.addFile(new File().setName('SHELL32.DLL').setSize(2048));
-    systemFolder.addFile(new File().setName('WIN.INI').setSize(512));
-    systemFolder.addFile(new File().setName('SYSTEM.INI').setSize(512));
-    windowsFolder.addSubfolder(systemFolder);
-
-    const programsFolder = new Folder()
-      .setName('PROGRAMS')
-      .setLocation('C:/WINDOWS/PROGRAMS');
-    programsFolder.addFile(new File().setName('NOTEPAD.EXE').setSize(1024));
-    programsFolder.addFile(new File().setName('CALC.EXE').setSize(1024));
-    programsFolder.addFile(new File().setName('WRITE.EXE').setSize(1024));
-    programsFolder.addFile(new File().setName('PAINT.EXE').setSize(1024));
-    programsFolder.addFile(new File().setName('SOL.EXE').setSize(1024));
-    programsFolder.addFile(new File().setName('WINMINE.EXE').setSize(1024));
-    windowsFolder.addSubfolder(programsFolder);
-
-    const fontsFolder = new Folder()
-      .setName('FONTS')
-      .setLocation('C:/WINDOWS/FONTS');
-    fontsFolder.addFile(new File().setName('ARIAL.TTF').setSize(1024));
-    fontsFolder.addFile(new File().setName('TIMES.TTF').setSize(1024));
-    fontsFolder.addFile(new File().setName('COUR.TTF').setSize(1024));
-    windowsFolder.addSubfolder(fontsFolder);
-
-    const tempFolder = new Folder()
-      .setName('TEMP')
-      .setLocation('C:/WINDOWS/TEMP');
-    tempFolder.addFile(new File().setName('TEMP_FILE.TMP').setSize(512));
-    windowsFolder.addSubfolder(tempFolder);
-
-    const programsRoot = new Folder()
-      .setName('PROGRAMS')
-      .setLocation('C:/PROGRAMS');
-    programsRoot.addFile(new File().setName('EXAMPLES.EXE').setSize(1024));
-
-    const myDocumentsFolder = new Folder()
-      .setName('MY DOCUMENTS')
-      .setLocation('C:/MY DOCUMENTS');
-    myDocumentsFolder.addFile(new File().setName('README.TXT').setSize(1024));
-
-    this.fileSystem
-      .addFile(autoexec)
-      .addFile(configSys)
-      .addFile(commandCom)
-      .addFile(ioSys)
-      .addFile(msDosSys)
-      .addSubfolder(dosFolder)
-      .addSubfolder(windowsFolder)
-      .addSubfolder(programsRoot)
-      .addSubfolder(myDocumentsFolder);
+  public getDrive(letter: string): Drive | null {
+    return (
+      this.drives.find(
+        (d) => d.getLetter().toUpperCase() === letter.toUpperCase()
+      ) || null
+    );
   }
 
   public getFolderFromPath(path: string): Folder | null {
-    const normalizedPath = path.replace(/\\/g, '/');
-    const pathParts = normalizedPath.split('/').filter(Boolean);
+    const { drive, parts } = this.resolvePath(path);
+    if (!drive) return null;
 
-    if (pathParts.length === 0) {
-      return null;
-    }
+    let currentFolder = drive.getRootFolder();
 
-    let currentFolder = this.fileSystem;
-
-    if (pathParts[0] === 'C:') {
-      pathParts.shift();
-    }
-
-    for (const folder of pathParts) {
-      const foundFolder = currentFolder.getSubFolder(folder);
-      if (!foundFolder) {
-        return null;
-      }
-      currentFolder = foundFolder;
+    for (const folderName of parts) {
+      const nextFolder = currentFolder.getSubFolder(folderName);
+      if (!nextFolder) return null;
+      currentFolder = nextFolder;
     }
 
     return currentFolder;
   }
 
   public getFileFromPath(path: string): File | null {
+    const { drive, parts } = this.resolvePath(path);
+    if (!drive || parts.length === 0) return null;
+
+    let currentFolder = drive.getRootFolder();
+
+    for (let i = 0; i < parts.length - 1; i++) {
+      const folderName = parts[i];
+      const nextFolder = currentFolder.getSubFolder(folderName);
+      if (!nextFolder) return null;
+      currentFolder = nextFolder;
+    }
+
+    const fileName = parts[parts.length - 1];
+    return (
+      currentFolder
+        .getFiles()
+        .find((f) => f.getName().toLowerCase() === fileName.toLowerCase()) ||
+      null
+    );
+  }
+
+  public getFileCount(path: string): number {
+    const folder = this.getFolderFromPath(path);
+    return folder ? folder.getFiles().length : 0;
+  }
+
+  public getFolderCount(path: string): number {
+    const folder = this.getFolderFromPath(path);
+    return folder ? folder.getSubFolders().length : 0;
+  }
+
+  public getTotalItemCount(path: string): number {
+    const folder = this.getFolderFromPath(path);
+    return folder
+      ? folder.getFiles().length + folder.getSubFolders().length
+      : 0;
+  }
+
+  public calculateFolderSize(path: string): number {
+    const folder = this.getFolderFromPath(path);
+    return folder ? folder.getSize() : 0;
+  }
+
+  private resolvePath(path: string): { drive: Drive | null; parts: string[] } {
     const normalizedPath = path.replace(/\\/g, '/');
     const pathParts = normalizedPath.split('/').filter(Boolean);
 
     if (pathParts.length === 0) {
-      return null;
+      return { drive: null, parts: [] };
     }
 
-    let currentFolder: Folder = this.fileSystem;
+    const driveLetter = pathParts[0].toUpperCase();
+    const drive = this.getDrive(driveLetter);
+    if (!drive) return { drive: null, parts: [] };
 
-    if (pathParts[0].endsWith(':')) {
-      if (pathParts[0] !== 'C:') {
-        return null;
-      }
-      pathParts.shift();
-    }
-
-    for (let i = 0; i < pathParts.length - 1; i++) {
-      const folderName = pathParts[i];
-      const nextFolder = currentFolder.getSubFolder(folderName);
-      if (!nextFolder) {
-        return null;
-      }
-      currentFolder = nextFolder;
-    }
-
-    const fileName = pathParts[pathParts.length - 1];
-    const file = currentFolder
-      .getFiles()
-      .find((f) => f.getName().toLowerCase() === fileName.toLowerCase());
-
-    return file || null;
+    const parts = pathParts.slice(1);
+    return { drive, parts };
   }
 
-  public getRootFolder(): Folder {
-    return this.fileSystem;
+  private initializeCDrive(cDrive: Drive): void {
+    const root = cDrive.getRootFolder();
+
+    root
+      .addFile(
+        new File()
+          .setName('AUTOEXEC.BAT')
+          .setAttributes({ hidden: true })
+          .setSize(1024)
+      )
+      .addFile(
+        new File()
+          .setName('CONFIG.SYS')
+          .setAttributes({ hidden: true })
+          .setSize(2048)
+      )
+      .addFile(new File().setName('COMMAND.COM').setSize(5120))
+      .addFile(
+        new File()
+          .setName('IO.SYS')
+          .setAttributes({ hidden: true })
+          .setSize(4096)
+      )
+      .addFile(
+        new File()
+          .setName('MSDOS.SYS')
+          .setAttributes({ hidden: true })
+          .setSize(4096)
+      );
+
+    const dosFolder = new Folder().setName('Dos').setLocation('C:\\Dos');
+    dosFolder
+      .addFile(new File().setName('EDIT.COM').setSize(1024))
+      .addFile(new File().setName('FORMAT.COM').setSize(1024))
+      .addFile(new File().setName('FDISK.EXE').setSize(1024))
+      .addFile(new File().setName('XCOPY.EXE').setSize(1024))
+      .addFile(new File().setName('MORE.COM').setSize(1024));
+    root.addSubfolder(dosFolder);
+
+    const windowsFolder = new Folder()
+      .setName('Windows')
+      .setLocation('C:\\Windows');
+    const systemFolder = new Folder()
+      .setName('System')
+      .setLocation('C:\\Windows\\System');
+    systemFolder
+      .addFile(new File().setName('KERNEL32.DLL').setSize(2048))
+      .addFile(new File().setName('USER.EXE').setSize(2048))
+      .addFile(new File().setName('GDI.EXE').setSize(2048))
+      .addFile(new File().setName('SHELL32.DLL').setSize(2048))
+      .addFile(new File().setName('WIN.INI').setSize(512))
+      .addFile(new File().setName('SYSTEM.INI').setSize(512));
+    windowsFolder.addSubfolder(systemFolder);
+
+    const programsFolder = new Folder()
+      .setName('Programs')
+      .setLocation('C:\\Windows\\Programs');
+    programsFolder
+      .addFile(new File().setName('NOTEPAD.EXE').setSize(1024))
+      .addFile(new File().setName('CALC.EXE').setSize(1024))
+      .addFile(new File().setName('WRITE.EXE').setSize(1024))
+      .addFile(new File().setName('PAINT.EXE').setSize(1024))
+      .addFile(new File().setName('SOL.EXE').setSize(1024))
+      .addFile(new File().setName('WINMINE.EXE').setSize(1024));
+    windowsFolder.addSubfolder(programsFolder);
+
+    const fontsFolder = new Folder()
+      .setName('Fonts')
+      .setLocation('C:\\Windows\\Fonts');
+    fontsFolder
+      .addFile(new File().setName('ARIAL.TTF').setSize(1024))
+      .addFile(new File().setName('TIMES.TTF').setSize(1024))
+      .addFile(new File().setName('COUR.TTF').setSize(1024));
+    windowsFolder.addSubfolder(fontsFolder);
+
+    const tempFolder = new Folder()
+      .setName('Temp')
+      .setLocation('C:\\Windows\\Temp');
+    tempFolder.addFile(new File().setName('TEMP_FILE.TMP').setSize(512));
+    windowsFolder.addSubfolder(tempFolder);
+
+    root.addSubfolder(windowsFolder);
+
+    const programsRoot = new Folder()
+      .setName('Programs')
+      .setLocation('C:\\Programs');
+    programsRoot.addFile(new File().setName('EXAMPLES.EXE').setSize(1024));
+    root.addSubfolder(programsRoot);
+
+    const documentsFolder = new Folder()
+      .setName('Documents')
+      .setLocation('C:\\Documents');
+    documentsFolder.addFile(
+      new File()
+        .setName('README.TXT')
+        .setSize(1024)
+        .setAttributes({ hidden: false })
+    );
+    root.addSubfolder(documentsFolder);
   }
 }

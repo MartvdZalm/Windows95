@@ -1,1 +1,91 @@
-<p>my-computer works!</p>
+<div class="my-computer">
+  <app-my-computer-toolbar
+    (navigateUp)="navigateUp()"
+    (refresh)="refresh()"
+    (viewModeChange)="setViewMode($event)"
+    (toggleHiddenFiles)="toggleHiddenFiles()"
+  />
+
+  <div class="address-bar">
+    <span class="address-label">Address:</span>
+    <span class="address-path">{{ currentPath() }}</span>
+  </div>
+
+  <div class="content-area" [class]="'view-' + viewMode()">
+    @if (viewMode() === 'icons') {
+    <div class="icons-view">
+      @for (item of currentItems; track item.getLocation()) {
+      <div
+        class="large-item"
+        [class.selected]="isSelected(item)"
+        (click)="handleItemClick($event, item)"
+        (dblclick)="doubleClickItem(item)"
+      >
+        @if (item.getIcon()) {
+        <img [src]="item.getIcon()" [alt]="item.getName()" />
+        }
+        <p>{{ item.getName() }}</p>
+      </div>
+
+      }
+    </div>
+    } @if (viewMode() === 'list') {
+    <div class="list-view">
+      @for (item of currentItems; track item.getLocation()) {
+      <div
+        class="list-item"
+        [class.selected]="isSelected(item)"
+        (click)="handleItemClick($event, item)"
+        (dblclick)="doubleClickItem(item)"
+      >
+        @if (item.getIcon()) {
+        <img [src]="item.getIcon()" [alt]="item.getName()" class="item-icon" />
+        }
+        <span class="item-name">{{ item.getName() }}</span>
+      </div>
+      }
+    </div>
+    } @if (viewMode() === 'details') {
+    <div class="details-view">
+      <div class="details-header">
+        <div class="header-name" (click)="setSortBy('name')">Name</div>
+        <div class="header-size" (click)="setSortBy('size')">Size</div>
+        <div class="header-type" (click)="setSortBy('type')">Type</div>
+        <div class="header-date" (click)="setSortBy('date')">Date Modified</div>
+      </div>
+      <div class="details-content">
+        @for (item of currentItems; track item.getLocation()) {
+        <div
+          class="detail-row"
+          [class.selected]="isSelected(item)"
+          (click)="handleItemClick($event, item)"
+          (dblclick)="doubleClickItem(item)"
+        >
+          <div class="detail-name">
+            @if (item.getIcon()) {
+            <img
+              [src]="item.getIcon()"
+              [alt]="item.getName()"
+              class="item-icon"
+            />
+
+            }
+            {{ item.getName() }}
+          </div>
+          <div class="detail-size">{{ getItemSize(item) }}</div>
+          <div class="detail-type">{{ getItemType(item) }}</div>
+          <div class="detail-date">
+            {{ formatDate(item.getDateModified()) }}
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </div>
+
+  <app-my-computer-statusbar
+    [selectedCount]="getSelectedItemsCount()"
+    [totalCount]="getTotalItemsCount()"
+  />
+</div>

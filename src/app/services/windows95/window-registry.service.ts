@@ -43,7 +43,7 @@ export class WindowRegistryService {
       {
         id: WindowIds.MY_COMPUTER,
         title: 'My Computer',
-        icon: '',
+        icon: 'images/windows95/windows95-my-computer.ico',
         component: MyComputerComponent,
         type: WindowType.APPLICATION,
         defaultWidth: 800,

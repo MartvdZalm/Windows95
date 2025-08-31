@@ -1,0 +1,39 @@
+<div class="toolbar">
+  <section>
+    <button (click)="onNavigateUp()">
+      <img src="images/windows95/mycomputer/arrow-up.ico" />
+      <p>Up</p>
+    </button>
+    <button (click)="onRefresh()">
+      <img src="images/windows95/mycomputer/refresh.ico" />
+      <p>Refresh</p>
+    </button>
+  </section>
+
+  <section>
+    <button
+      [class.active]="viewMode === 'icons'"
+      (click)="onViewModeChange('icons')"
+    >
+      Large Icons
+    </button>
+    <button
+      [class.active]="viewMode === 'list'"
+      (click)="onViewModeChange('list')"
+    >
+      List
+    </button>
+    <button
+      [class.active]="viewMode === 'details'"
+      (click)="onViewModeChange('details')"
+    >
+      Details
+    </button>
+  </section>
+
+  <section>
+    <button [class.active]="showHiddenFiles" (click)="onToggleHiddenFiles()">
+      Hidden
+    </button>
+  </section>
+</div>
