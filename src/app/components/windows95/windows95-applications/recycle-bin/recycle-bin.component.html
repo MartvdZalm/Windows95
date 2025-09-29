@@ -1,1 +1,10 @@
-<p>recycle-bin works!</p>
+<div class="recycle-bin">
+  <app-recycle-bin-toolbar (viewModeChange)="setViewMode($event)" />
+
+  <app-file-manager
+    [items]="currentItems()"
+    [viewMode]="viewMode()"
+    [addressPath]="'Recycle Bin'"
+    (onDoubleClickItem)="doubleClickItem($event)"
+  />
+</div>

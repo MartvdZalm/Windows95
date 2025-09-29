@@ -1,36 +1,26 @@
 <section class="desktop">
   @for (shortcut of shortcuts; track $index) {
-    <app-windows95-desktop-shortcut
-      [icon]="shortcut.icon"
-      [name]="shortcut.name"
-      [window]="shortcut.window"
-    />
-  }
-
-  @for (window of windowService.windowsList(); track window.instanceId) {
-    @if (!window.minimized) {
-      <app-windows95-window [windowId]="window.instanceId">
-        @switch (window.id) {
-          @case ('ie') {
-            <app-internet-explorer />
-          }
-          @case ('my-computer') {
-            <app-my-computer />
-          }
-          @case ('recycle-bin') {
-            <app-recycle-bin />
-          }
-          @case ('notepad') {
-            <app-notepad />
-          }
-          @case ('shutdown') {
-            <app-shutdown />
-          }
-          @case ('welcome') {
-            <app-welcome />
-          }
-        }
-      </app-windows95-window>
-    }
-  }
+  <app-windows95-desktop-shortcut
+    [icon]="shortcut.icon"
+    [name]="shortcut.name"
+    [window]="shortcut.window"
+  />
+  } @for (window of windowService.windowsList(); track window.instanceId) { @if
+  (!window.minimized) {
+  <app-windows95-window [windowId]="window.instanceId">
+    @switch (window.id) { @case ('ie') {
+    <app-internet-explorer />
+    } @case ('my-computer') {
+    <app-my-computer />
+    } @case ('recycle-bin') {
+    <app-recycle-bin />
+    } @case ('notepad') {
+    <app-notepad />
+    } @case ('shutdown') {
+    <app-shutdown />
+    } @case ('welcome') {
+    <app-welcome />
+    } }
+  </app-windows95-window>
+  } }
 </section>

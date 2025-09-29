@@ -1,108 +1,114 @@
 @use "../../../styles/variables" as *;
 
 section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: black;
+  font-family: "IBM Courier" !important;
+
+  .ibm__frame {
+    background: #d3d3d3;
+    width: 900px;
+    height: 800px;
+    border: 5px solid #3d3b3b;
+    box-shadow: 0px 0px 0px 10px #b6b6b6;
+    border-radius: 5px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    background-color: black;
-    font-family: 'IBM Courier' !important;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: width 0.5s ease, height 0.5s ease, border-radius 0.5s ease,
+      box-shadow 0.5s ease;
 
-    .ibm__frame {
-        background: #D3D3D3;
-        width: 900px;
-        height: 800px;
-        border: 5px solid #3d3b3b;
-        box-shadow: 0px 0px 0px 10px #b6b6b6;
-        border-radius: 5px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        transition: width 0.5s ease, height 0.5s ease, border-radius 0.5s ease, box-shadow 0.5s ease;
-    
-        .ibm__frame__screen {
-            height: 600px;
-            margin: 35px 35px 0px 35px;
-            border: 3px solid #222121;
-            border-radius: 20px;
-            box-shadow: inset 0px 0px 10px 10px #000;
-            transition: height 0.5s ease, margin 0.5s ease, border-radius 0.5s ease, box-shadow 0.5s ease;
+    .ibm__frame__screen {
+      height: 600px;
+      margin: 35px 35px 0px 35px;
+      border: 3px solid #222121;
+      border-radius: 20px;
+      box-shadow: inset 0px 0px 10px 10px #000;
+      transition: height 0.5s ease, margin 0.5s ease, border-radius 0.5s ease,
+        box-shadow 0.5s ease;
 
-            #ibm__frame__terminal {
-                background-color: #131;
-                background-image: radial-gradient(ellipse 500% 100% at 50% 90%, transparent, rgb(25, 51, 25));
-                background-position: center;
-                display: block;
-                width: 100%;
-                height: 100%;
-                border-radius: 15px;
-                font-family: 'IBM Courier', monospace;
-                font-size: 17px;
-                color: rgba(128, 255, 128, 0.8);
-                position: relative;
+      #ibm__frame__terminal {
+        background-color: #131;
+        background-image: radial-gradient(
+          ellipse 500% 100% at 50% 90%,
+          transparent,
+          rgb(25, 51, 25)
+        );
+        background-position: center;
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+        font-family: "IBM Courier", monospace;
+        font-size: 17px;
+        color: rgba(128, 255, 128, 0.8);
+        position: relative;
 
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: fill;
-                    border-radius: 15px;
-                }
-            }
-
-            #ibm__frame__terminal.off {
-                background-color: black;
-                background-image: none;
-            }
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: fill;
+          border-radius: 15px;
         }
+      }
 
-        .ibm__frame--lower {
-            height: 80px;
-            border-top: 5px solid #3d3b3b;
-            font-size: 62px;
-            font-weight: normal;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            p {
-                font-size: 50px;
-                color: #3d3b3b;
-            }
-
-            .ibm__frame--logo {
-                display: flex;
-                align-items: center;
-                font-size: 35px;
-                height: 100%;
-                margin: 0 auto;
-            }
-
-            .ibm-frame-on-off-button {
-                width: 50px;
-                height: 50px;
-                border: 3px solid black;
-                border-radius: 5px;
-                margin-right: 20px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                .ibm-frame-on-off-button-circle {
-                    background-color: gray;
-                    width: 80%;
-                    height: 80%;
-                    margin: auto;
-                    border: 5px solid black;
-                    border-radius: 50%;
-                    cursor: pointer;
-                }
-
-                .ibm-frame-on-off-button-circle:hover {
-                    background: $red-color;
-                }
-            }
-        }
+      #ibm__frame__terminal.off {
+        background-color: black;
+        background-image: none;
+      }
     }
+
+    .ibm__frame--lower {
+      height: 80px;
+      border-top: 5px solid #3d3b3b;
+      font-size: 62px;
+      font-weight: normal;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      p {
+        font-size: 50px;
+        color: #3d3b3b;
+      }
+
+      .ibm__frame--logo {
+        display: flex;
+        align-items: center;
+        font-size: 35px;
+        height: 100%;
+        margin: 0 auto;
+      }
+
+      .ibm-frame-on-off-button {
+        width: 50px;
+        height: 50px;
+        border: 3px solid black;
+        border-radius: 5px;
+        margin-right: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .ibm-frame-on-off-button-circle {
+          background-color: gray;
+          width: 80%;
+          height: 80%;
+          margin: auto;
+          border: 5px solid black;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+
+        .ibm-frame-on-off-button-circle:hover {
+          background: $red-color;
+        }
+      }
+    }
+  }
 }

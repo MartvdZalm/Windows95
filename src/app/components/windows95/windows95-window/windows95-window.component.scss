@@ -1,5 +1,6 @@
 @use "../../../../styles/variables" as *;
 @use "../../../../styles/mixins" as *;
+@use "sass:color";
 
 .window {
   position: absolute;
@@ -54,9 +55,26 @@
         color: black;
         position: relative;
         transition: top 0.1s ease, left 0.1s ease;
+        width: 25px;
+        margin: 1px;
+
+        .material-icons {
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
 
         &:active {
           @include windows95-border(black, black, white, white, 3px, 2px);
+        }
+
+        &:hover {
+          background-color: color.adjust(
+            $windows95-gray-color,
+            $lightness: -10%
+          );
         }
       }
     }

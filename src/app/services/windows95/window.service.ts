@@ -109,7 +109,7 @@ export class WindowService {
           maximized: isMaximizing,
           position: isMaximizing ? { x: 0, y: 0 } : w.position,
           size: isMaximizing
-            ? { width: window.innerWidth, height: window.innerHeight }
+            ? { width: window.innerWidth, height: window.innerHeight - 50 }
             : {
                 width: w.definition.defaultWidth,
                 height: w.definition.defaultHeight,

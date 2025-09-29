@@ -16,7 +16,9 @@ export class MkDirCommand implements TerminalCommand {
     if (!args[0]) return 'Specify a directory name';
 
     const newFolderName = args[0];
-    const currentFolder = this.fileSystemService.getFolderFromPath(this.terminalService.currentDir());
+    const currentFolder = this.fileSystemService.getFolderFromPath(
+      this.terminalService.currentDir()
+    );
 
     if (!currentFolder) return 'Invalid current directory';
     if (currentFolder.getSubFolder(newFolderName)) {

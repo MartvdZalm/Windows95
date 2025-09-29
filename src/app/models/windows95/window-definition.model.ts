@@ -1,5 +1,5 @@
-import { Component, Type } from "@angular/core";
-import { WindowType } from "./window-type.model";
+import { Type } from '@angular/core';
+import { WindowType } from './window-type.model';
 
 export interface WindowDefinition {
   id: string;

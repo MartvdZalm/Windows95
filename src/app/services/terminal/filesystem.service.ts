@@ -154,9 +154,18 @@ export class FileSystemService {
     dosFolder
       .addFile(new File().setName('EDIT.COM').setSize(1024))
       .addFile(new File().setName('FORMAT.COM').setSize(1024))
-      .addFile(new File().setName('FDISK.EXE').setSize(1024))
-      .addFile(new File().setName('XCOPY.EXE').setSize(1024))
-      .addFile(new File().setName('MORE.COM').setSize(1024));
+      .addFile(
+        new File()
+          .setName('FDISK.EXE')
+          .setSize(1024)
+          .setAttributes({ hidden: false })
+      )
+      .addFile(
+        new File()
+          .setName('XCOPY.EXE')
+          .setSize(1024)
+          .setAttributes({ hidden: false })
+      );
     root.addSubfolder(dosFolder);
 
     const windowsFolder = new Folder()
@@ -167,9 +176,12 @@ export class FileSystemService {
       .setLocation('C:\\Windows\\System');
     systemFolder
       .addFile(new File().setName('KERNEL32.DLL').setSize(2048))
-      .addFile(new File().setName('USER.EXE').setSize(2048))
-      .addFile(new File().setName('GDI.EXE').setSize(2048))
-      .addFile(new File().setName('SHELL32.DLL').setSize(2048))
+      .addFile(
+        new File()
+          .setName('USER.EXE')
+          .setSize(2048)
+          .setAttributes({ hidden: false })
+      )
       .addFile(new File().setName('WIN.INI').setSize(512))
       .addFile(new File().setName('SYSTEM.INI').setSize(512));
     windowsFolder.addSubfolder(systemFolder);
@@ -178,46 +190,78 @@ export class FileSystemService {
       .setName('Programs')
       .setLocation('C:\\Windows\\Programs');
     programsFolder
-      .addFile(new File().setName('NOTEPAD.EXE').setSize(1024))
-      .addFile(new File().setName('CALC.EXE').setSize(1024))
-      .addFile(new File().setName('WRITE.EXE').setSize(1024))
-      .addFile(new File().setName('PAINT.EXE').setSize(1024))
-      .addFile(new File().setName('SOL.EXE').setSize(1024))
-      .addFile(new File().setName('WINMINE.EXE').setSize(1024));
+      .addFile(
+        new File()
+          .setName('NOTEPAD.EXE')
+          .setSize(1024)
+          .setAttributes({ hidden: false })
+      )
+      .addFile(
+        new File()
+          .setName('CALC.EXE')
+          .setSize(1024)
+          .setAttributes({ hidden: false })
+      )
+      .addFile(
+        new File()
+          .setName('WRITE.EXE')
+          .setSize(1024)
+          .setAttributes({ hidden: false })
+      )
+      .addFile(
+        new File()
+          .setName('PAINT.EXE')
+          .setSize(1024)
+          .setAttributes({ hidden: false })
+      );
     windowsFolder.addSubfolder(programsFolder);
 
     const fontsFolder = new Folder()
       .setName('Fonts')
       .setLocation('C:\\Windows\\Fonts');
     fontsFolder
-      .addFile(new File().setName('ARIAL.TTF').setSize(1024))
-      .addFile(new File().setName('TIMES.TTF').setSize(1024))
-      .addFile(new File().setName('COUR.TTF').setSize(1024));
+      .addFile(
+        new File()
+          .setName('ARIAL.TTF')
+          .setSize(1024)
+          .setAttributes({ hidden: false })
+      )
+      .addFile(
+        new File()
+          .setName('TIMES.TTF')
+          .setSize(1024)
+          .setAttributes({ hidden: false })
+      )
+      .addFile(
+        new File()
+          .setName('COUR.TTF')
+          .setSize(1024)
+          .setAttributes({ hidden: false })
+      );
     windowsFolder.addSubfolder(fontsFolder);
-
-    const tempFolder = new Folder()
-      .setName('Temp')
-      .setLocation('C:\\Windows\\Temp');
-    tempFolder.addFile(new File().setName('TEMP_FILE.TMP').setSize(512));
-    windowsFolder.addSubfolder(tempFolder);
-
-    root.addSubfolder(windowsFolder);
-
-    const programsRoot = new Folder()
-      .setName('Programs')
-      .setLocation('C:\\Programs');
-    programsRoot.addFile(new File().setName('EXAMPLES.EXE').setSize(1024));
-    root.addSubfolder(programsRoot);
 
     const documentsFolder = new Folder()
       .setName('Documents')
-      .setLocation('C:\\Documents');
+      .setLocation('C:\\Windows\\Documents');
     documentsFolder.addFile(
       new File()
         .setName('README.TXT')
         .setSize(1024)
         .setAttributes({ hidden: false })
     );
-    root.addSubfolder(documentsFolder);
+    windowsFolder.addSubfolder(documentsFolder);
+
+    root.addSubfolder(windowsFolder);
+
+    const programsRoot = new Folder()
+      .setName('Programs')
+      .setLocation('C:\\Programs');
+    programsRoot.addFile(
+      new File()
+        .setName('EXAMPLES.EXE')
+        .setSize(1024)
+        .setAttributes({ hidden: false })
+    );
+    root.addSubfolder(programsRoot);
   }
 }

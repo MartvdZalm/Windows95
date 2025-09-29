@@ -8,19 +8,13 @@ import { Component, output } from '@angular/core';
 })
 export class MyComputerToolbarComponent {
   public navigateUp = output<void>();
-  public refresh = output<void>();
   public viewModeChange = output<'icons' | 'list' | 'details'>();
   public toggleHiddenFiles = output<void>();
-
   public viewMode: 'icons' | 'list' | 'details' = 'icons';
   public showHiddenFiles = false;
 
   public onNavigateUp(): void {
     this.navigateUp.emit();
-  }
-
-  public onRefresh(): void {
-    this.refresh.emit();
   }
 
   public onViewModeChange(mode: 'icons' | 'list' | 'details'): void {

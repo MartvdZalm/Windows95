@@ -25,37 +25,38 @@
   </div>
 
   <div class="window__content">
-    @if (browserService.currentComponent(); as component) {
-      @if (browserService.currentUrl() === "search") {
-        <app-search-results [searchResults]="websiteRegistryService.searchWebsites(searchInput)" />
-      } @else {
-        <ng-container *ngComponentOutlet="component" />
-      }
+    @if (browserService.currentComponent(); as component) { @if
+    (browserService.currentUrl() === "search") {
+    <app-search-results
+      [searchResults]="websiteRegistryService.searchWebsites(searchInput)"
+    />
     } @else {
-      <div class="window__search-box">
-        <img
-          class="window__search__google-logo"
-          src="images/windows95/windows95-ie-5-google-logo.png"
-          alt="Google"
+    <ng-container *ngComponentOutlet="component" />
+    } } @else {
+    <div class="window__search-box">
+      <img
+        class="window__search__google-logo"
+        src="images/windows95/windows95-ie-5-google-logo.png"
+        alt="Google"
+      />
+      <form class="window__search__form" (ngSubmit)="search()">
+        <input
+          type="text"
+          class="window__search-input"
+          [(ngModel)]="searchInput"
+          name="searchInput"
+          placeholder="Search Google..."
         />
-        <form class="window__search__form" (ngSubmit)="search()">
-          <input
-            type="text"
-            class="window__search-input"
-            [(ngModel)]="searchInput"
-            name="searchInput"
-            placeholder="Search Google..."
-          />
-          <div class="window__search-buttons">
-            <button type="submit" class="window__search-button">
-              Google Search
-            </button>
-            <button type="button" class="window__search-button">
-              I'm Feeling Lucky
-            </button>
-          </div>
-        </form>
-      </div>
-      }
+        <div class="window__search-buttons">
+          <button type="submit" class="window__search-button">
+            Google Search
+          </button>
+          <button type="button" class="window__search-button">
+            I'm Feeling Lucky
+          </button>
+        </div>
+      </form>
+    </div>
+    }
   </div>
 </div>

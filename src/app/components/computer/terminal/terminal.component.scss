@@ -28,7 +28,7 @@ section {
     display: flex;
     padding: 2px 5px;
     flex-shrink: 0;
-    
+
     p {
       text-shadow: 0 0 1ex #131, 0 0 2px #00dc16;
       color: #00dc16;
@@ -46,7 +46,13 @@ section {
   }
 
   @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
   }
 }

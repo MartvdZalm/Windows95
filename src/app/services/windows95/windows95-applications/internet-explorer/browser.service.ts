@@ -13,11 +13,12 @@ export class BrowserService {
     if (!url) {
       return;
     }
-    
+
     const normalizedUrl = url === 'home' ? 'home' : this.ensureHttp(url);
     this.currentUrl.set(normalizedUrl);
-    
-    const component = this.websiteRegistryService.getComponentForUrl(normalizedUrl);
+
+    const component =
+      this.websiteRegistryService.getComponentForUrl(normalizedUrl);
     this.currentComponent.set(component);
   }
 

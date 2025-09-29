@@ -7,25 +7,6 @@
   font-family: "Courier New", Courier, "Lucida Console", monospace;
   overflow-y: auto;
 
-  &__menu {
-    display: flex;
-    background: #c0c0c0;
-    padding: 3px;
-    border-bottom: 1px solid #808080;
-    width: 100%;
-
-    &__separator {
-      border-left: 1px solid #808080;
-      border-right: 1px solid #ffffff;
-      height: 30px;
-      margin: 0 5px;
-    }
-
-    &__item {
-      @include windows95-button(35px, 30px);
-    }
-  }
-
   &__content {
     background: white;
     padding: 10px;

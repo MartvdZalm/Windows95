@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-windows95-taskbar-start',
   imports: [],
   templateUrl: './windows95-taskbar-start.component.html',
-  styleUrl: './windows95-taskbar-start.component.scss'
+  styleUrl: './windows95-taskbar-start.component.scss',
 })
-export class Windows95TaskbarStartComponent {
-
-}
+export class Windows95TaskbarStartComponent {}

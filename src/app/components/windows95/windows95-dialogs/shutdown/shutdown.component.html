@@ -1,29 +1,54 @@
 <div id="shut-down-windows">
   <div>
-    <img src="images/windows95/windows95-shutdown.ico" alt="Shut Down">
+    <img src="images/windows95/windows95-shutdown.ico" alt="Shut Down" />
     <div>
       <p>Are you sure you want to:</p>
-  
-      <input type="radio" id="shutdwon" name="shutdown-option" value="shutdown" [(ngModel)]="selectedOption">
-      <label for="shutdwon"><span class="text__underline">S</span>hut down the computer?</label><br>
-  
-      <input type="radio" id="restart" name="shutdown-option" value="restart" [(ngModel)]="selectedOption">
-      <label for="restart"><span class="text__underline">R</span>estart the computer?</label><br>
-  
-      <input type="radio" id="ms-dos" name="shutdown-option" value="ms-dos" [(ngModel)]="selectedOption">
-      <label for="ms-dos">Restart the computer in <span class="text__underline">M</span>S-DOS mode?</label>
+
+      <input
+        type="radio"
+        id="shutdwon"
+        name="shutdown-option"
+        value="shutdown"
+        [(ngModel)]="selectedOption"
+      />
+      <label for="shutdwon"
+        ><span class="text__underline">S</span>hut down the computer?</label
+      ><br />
+
+      <input
+        type="radio"
+        id="restart"
+        name="shutdown-option"
+        value="restart"
+        [(ngModel)]="selectedOption"
+      />
+      <label for="restart"
+        ><span class="text__underline">R</span>estart the computer?</label
+      ><br />
+
+      <input
+        type="radio"
+        id="ms-dos"
+        name="shutdown-option"
+        value="ms-dos"
+        [(ngModel)]="selectedOption"
+      />
+      <label for="ms-dos"
+        >Restart the computer in <span class="text__underline">M</span>S-DOS
+        mode?</label
+      >
     </div>
   </div>
 
-    <span>
-      <button class="shutdown__yes" (click)="onYesClick()">
-        <span class="text__underline">Y</span>es
-      </button>
-      <button class="shutdown__no" (click)="onNoClick()">
-        <span class="text__underline">N</span>o
-      </button>
-      <button class="shutdown__help">
-        <span class="text__underline">H</span>elp
-      </button>
-    </span>
+  <span>
+    <button class="shutdown__yes" (click)="onYesClick()">
+      <span class="text__underline">Y</span>es
+    </button>
+    <button class="shutdown__no" (click)="onNoClick()">
+      <span class="text__underline">N</span>o
+    </button>
+    <button class="shutdown__help">
+      <span class="text__underline">H</span>elp
+    </button>
+  </span>
 </div>

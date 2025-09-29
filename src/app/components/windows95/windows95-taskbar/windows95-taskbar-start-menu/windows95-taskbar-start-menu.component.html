@@ -5,7 +5,7 @@
   </div>
   <ul class="taskbar__menu__list">
     @for (startMenuItem of startMenuItems; track $index) {
-      <app-windows95-taskbar-start-menu-item [startMenuItem]="(startMenuItem)" />
+    <app-windows95-taskbar-start-menu-item [startMenuItem]="startMenuItem" />
     }
   </ul>
 </div>

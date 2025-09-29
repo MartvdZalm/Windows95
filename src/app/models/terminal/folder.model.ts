@@ -98,7 +98,16 @@ export class Folder {
   }
 
   public getSize(): number {
-    return this.files.reduce((total, file) => total + file.getSize(), 0);
+    console.log(this.name);
+    const fileSize = this.files.reduce(
+      (total, file) => total + file.getSize(),
+      0
+    );
+    const subfolderSize = this.subfolders.reduce(
+      (total, folder) => total + folder.getSize(),
+      0
+    );
+    return fileSize + subfolderSize;
   }
 
   public displayContents(): string {

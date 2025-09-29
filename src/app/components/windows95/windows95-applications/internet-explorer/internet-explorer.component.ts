@@ -13,14 +13,16 @@ import { SearchResult } from '../../../../models/windows95/windows95-application
   styleUrl: './internet-explorer.component.scss',
 })
 export class InternetExplorerComponent {
-  protected  websiteRegistryService = inject(WebsiteRegistryService);
-  protected  browserService = inject(BrowserService);
+  protected websiteRegistryService = inject(WebsiteRegistryService);
+  protected browserService = inject(BrowserService);
 
   public addressInput = '';
   public searchInput = '';
 
   public search(): void {
-    const results = this.websiteRegistryService.searchWebsites(this.searchInput);
+    const results = this.websiteRegistryService.searchWebsites(
+      this.searchInput
+    );
     this.browserService.navigateToSearchResults(results);
   }
 

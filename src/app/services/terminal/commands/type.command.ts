@@ -1,7 +1,7 @@
-import { inject, Injectable } from "@angular/core";
-import { TerminalCommand } from "../../../models/terminal/terminal-command.model";
-import { FileSystemService } from "../filesystem.service";
-import { File } from "../../../models/terminal/file.model";
+import { inject, Injectable } from '@angular/core';
+import { TerminalCommand } from '../../../models/terminal/terminal-command.model';
+import { FileSystemService } from '../filesystem.service';
+import { File } from '../../../models/terminal/file.model';
 
 @Injectable({ providedIn: 'root' })
 export class TypeCommand implements TerminalCommand {

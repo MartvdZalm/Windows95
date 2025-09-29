@@ -1,7 +1,7 @@
-import { inject, Injectable } from "@angular/core";
-import { TerminalCommand } from "../../../models/terminal/terminal-command.model";
-import { TerminalService } from "../terminal.service";
-import { Router } from "@angular/router";
+import { inject, Injectable } from '@angular/core';
+import { TerminalCommand } from '../../../models/terminal/terminal-command.model';
+import { TerminalService } from '../terminal.service';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class WinCommand implements TerminalCommand {
@@ -29,7 +29,7 @@ export class WinCommand implements TerminalCommand {
       'Loading SETVER.EXE',
       'Initializing VMM32.VXD',
       'Loading device drivers...',
-      'Preparing to start Windows 95 GUI'
+      'Preparing to start Windows 95 GUI',
     ];
 
     for (const step of bootSteps) {

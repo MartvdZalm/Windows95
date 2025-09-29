@@ -4,7 +4,7 @@
       <img src="images/windows95/mycomputer/arrow-up.ico" />
       <p>Up</p>
     </button>
-    <button (click)="onRefresh()">
+    <button>
       <img src="images/windows95/mycomputer/refresh.ico" />
       <p>Refresh</p>
     </button>
@@ -15,7 +15,7 @@
       [class.active]="viewMode === 'icons'"
       (click)="onViewModeChange('icons')"
     >
-      Large Icons
+      Icons
     </button>
     <button
       [class.active]="viewMode === 'list'"

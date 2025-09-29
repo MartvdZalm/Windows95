@@ -1,8 +1,8 @@
 .search-results {
-  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Arial, sans-serif;
+  font-family: "MS Sans Serif", "Microsoft Sans Serif", Arial, sans-serif;
   font-size: 12px;
   color: #000;
-  background: #E0E0E0;
+  background: #e0e0e0;
   // border: 2px solid #000;
   padding: 8px;
   // box-shadow: inset 1px 1px 0px #FFF, inset -1px -1px 0px #808080;
@@ -34,15 +34,15 @@
     font-weight: bold;
     margin: 0;
     color: #000080;
-    text-shadow: 1px 1px 0px #FFF;
+    text-shadow: 1px 1px 0px #fff;
   }
 
   &__count {
-    background: #C0C0C0;
+    background: #c0c0c0;
     padding: 4px 8px;
     margin-bottom: 12px;
     border: 1px solid #808080;
-    box-shadow: inset 1px 1px 0px #FFF;
+    box-shadow: inset 1px 1px 0px #fff;
   }
 
   &__list {
@@ -56,12 +56,12 @@
     border: 1px solid transparent;
 
     &:hover {
-      background: #316AC5;
-      color: #FFF;
-      
+      background: #316ac5;
+      color: #fff;
+
       .search-results__name,
       .search-results__url {
-        color: #FFF;
+        color: #fff;
       }
     }
   }

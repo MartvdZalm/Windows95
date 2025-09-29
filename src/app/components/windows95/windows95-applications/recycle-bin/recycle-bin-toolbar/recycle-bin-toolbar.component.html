@@ -1,0 +1,40 @@
+<div class="toolbar">
+  <section>
+    <button>
+      <img src="images/windows95/mycomputer/arrow-up.ico" alt="Restore" />
+      <p>Restore</p>
+    </button>
+    <button>Delete</button>
+  </section>
+
+  <section>
+    <button>Empty Recycle Bin</button>
+  </section>
+
+  <section>
+    <button
+      [class.active]="viewMode === 'icons'"
+      (click)="onViewModeChange('icons')"
+    >
+      Icons
+    </button>
+    <button
+      [class.active]="viewMode === 'list'"
+      (click)="onViewModeChange('list')"
+    >
+      List
+    </button>
+    <button
+      [class.active]="viewMode === 'details'"
+      (click)="onViewModeChange('details')"
+    >
+      Details
+    </button>
+  </section>
+  <section>
+    <button>
+      <img src="images/windows95/mycomputer/refresh.ico" alt="Restore" />
+      <p>Restore</p>
+    </button>
+  </section>
+</div>

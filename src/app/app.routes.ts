@@ -15,5 +15,5 @@ export const routes: Routes = [
   {
     path: 'boot',
     component: Windows95BootComponent,
-  }
+  },
 ];

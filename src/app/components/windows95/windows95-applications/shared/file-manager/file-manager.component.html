@@ -1,0 +1,83 @@
+<div class="file-manager">
+  <section class="address-bar">
+    <span class="address-label">Address:</span>
+    <span class="address-path">{{ addressPath() }}</span>
+  </section>
+
+  <section class="content-area" [class]="'view-' + viewMode()">
+    @if (viewMode() === 'icons') {
+    <div class="icons-view">
+      @for (item of items(); track item.getLocation() + item.getName()) {
+      <div
+        class="large-item"
+        [class.selected]="isSelected(item)"
+        (click)="handleItemClick($event, item)"
+        (dblclick)="doubleClickItem(item)"
+      >
+        @if (item.getIcon()) {
+        <img [src]="item.getIcon()" [alt]="item.getName()" />
+        }
+        <p>{{ item.getName() }}</p>
+      </div>
+      }
+    </div>
+    } @else if (viewMode() === 'list') {
+    <div class="list-view">
+      @for (item of items(); track item.getLocation() + item.getName()) {
+      <div
+        class="list-item"
+        [class.selected]="isSelected(item)"
+        (click)="handleItemClick($event, item)"
+        (dblclick)="doubleClickItem(item)"
+      >
+        @if (item.getIcon()) {
+        <img [src]="item.getIcon()" [alt]="item.getName()" class="item-icon" />
+        }
+        <span class="item-name">{{ item.getName() }}</span>
+      </div>
+      }
+    </div>
+    } @else if (viewMode() === 'details') {
+    <div class="details-view">
+      <div class="details-header">
+        <div class="header-name">Name</div>
+        <div class="header-size">Size</div>
+        <div class="header-type">Type</div>
+        <div class="header-date">Date Modified</div>
+      </div>
+      <div class="details-content">
+        @for (item of items(); track item.getLocation() + item.getName()) {
+        <div
+          class="detail-row"
+          [class.selected]="isSelected(item)"
+          (click)="handleItemClick($event, item)"
+          (dblclick)="doubleClickItem(item)"
+        >
+          <div class="detail-name">
+            @if (item.getIcon()) {
+            <img
+              [src]="item.getIcon()"
+              [alt]="item.getName()"
+              class="item-icon"
+            />
+
+            }
+            {{ item.getName() }}
+          </div>
+          <div class="detail-size">{{ getItemSize(item) }}</div>
+          <div class="detail-type">{{ getItemType(item) }}</div>
+          <div class="detail-date">
+            {{ formatDate(item.getDateModified()) }}
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </section>
+
+  <app-file-manager-status-bar
+    [selectedCount]="getSelectedItemsCount()"
+    [totalCount]="getTotalItemsCount()"
+  />
+</div>

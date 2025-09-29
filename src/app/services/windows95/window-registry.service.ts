@@ -31,7 +31,7 @@ export class WindowRegistryService {
       {
         id: WindowIds.RECYCLE_BIN,
         title: 'Recycle Bin',
-        icon: '',
+        icon: 'images/windows95/windows95-recycle-bin-empty.ico',
         component: RecycleBinComponent,
         type: WindowType.APPLICATION,
         defaultWidth: 650,

@@ -64,25 +64,25 @@
     .window__search-box {
       text-align: center;
     }
-    
+
     .window__search__google-logo {
       width: 500px;
     }
-    
+
     .window__search__form {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 10px;
     }
-    
+
     .window__search-input {
       width: 300px;
       padding: 5px;
       font-size: 14px;
       border: 1px solid #ccc;
     }
-    
+
     .window__search-button {
       padding: 5px 10px;
       font-size: 14px;
@@ -91,7 +91,7 @@
       cursor: pointer;
       color: black;
       &:hover {
-          background-color: #ddd;
+        background-color: #ddd;
       }
     }
   }

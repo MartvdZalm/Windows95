@@ -72,9 +72,7 @@ export class WebsiteRegistryService {
     const results: SearchResult[] = [];
     const normalizedQuery = query.toLowerCase();
 
-    // Search through all registered websites
     for (const [id, website] of this.websites) {
-      // Check if query matches website title or URL
       const matchesTitle = website.title
         .toLowerCase()
         .includes(normalizedQuery);
@@ -93,7 +91,6 @@ export class WebsiteRegistryService {
       }
     }
 
-    // Sort by best match first
     return results.sort((a, b) => b.matchScore - a.matchScore);
   }
 
@@ -103,17 +100,13 @@ export class WebsiteRegistryService {
   ): number {
     let score = 0;
 
-    // Higher score for title matches
     if (website.title.toLowerCase().includes(query)) {
       score += 10;
-      // Bonus for exact title match
       if (website.title.toLowerCase() === query) score += 5;
     }
 
-    // Score for URL matches
     if (website.defaultUrl.toLowerCase().includes(query)) {
       score += 5;
-      // Bonus for exact domain match
       try {
         const domain = new URL(website.defaultUrl).hostname;
         if (domain === query || domain.includes(query)) score += 3;

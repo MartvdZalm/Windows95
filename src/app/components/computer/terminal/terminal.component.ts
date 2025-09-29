@@ -152,7 +152,14 @@ export class TerminalComponent implements OnInit {
   private scrollToBottom(): void {
     const container = document.querySelector('.terminal');
     if (container) {
-      container.scrollTop = container.scrollHeight;
+      setTimeout(() => {
+        container.scrollTop = container.scrollHeight;
+
+        const promptElement = container.querySelector('.prompt__line');
+        if (promptElement) {
+          promptElement.scrollIntoView({ block: 'end' });
+        }
+      }, 10);
     }
   }
 }

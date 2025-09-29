@@ -48,7 +48,7 @@ export class Windows95DesktopComponent implements OnInit {
     {
       name: 'Recycle Bin',
       icon: 'images/windows95/windows95-recycle-bin-empty.ico',
-      window: '',
+      window: 'recycle-bin',
     },
     {
       name: 'Notepad',
