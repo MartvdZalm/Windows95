@@ -6,6 +6,9 @@ import { Folder } from '../../../../models/terminal/folder.model';
 import { File } from '../../../../models/terminal/file.model';
 import { FILE_ASSOCIATIONS } from '../../../../models/terminal/file-associations';
 import { FileManagerComponent } from '../shared/file-manager/file-manager.component';
+import { WindowService } from '../../../../services/windows95/window.service';
+import { WindowIds } from '../../../../models/windows95/window-ids.model';
+import { PdfViewerService } from '../../../../services/windows95/windows95-applications/pdf-viewer/pdf-viewer.service';
 
 type FileSystemEntity = Drive | Folder | File;
 
@@ -24,6 +27,8 @@ export class MyComputerComponent {
   public showHiddenFiles = signal<boolean>(false);
 
   private fileSystemService = inject(FileSystemService);
+  private windowService = inject(WindowService);
+  private pdfViewerService = inject(PdfViewerService);
 
   public currentItems = computed(() => {
     if (this.currentPath() === 'root') {
@@ -88,8 +93,25 @@ export class MyComputerComponent {
     } else if (item instanceof Folder) {
       this.navigateTo(item.getLocation());
     } else if (item instanceof File) {
-      // TODO: Open files
+      this.openFile(item);
     }
+  }
+
+  private openFile(file: File): void {
+    const extension = file.getExtension().toLowerCase();
+
+    if (extension === 'pdf') {
+      const assetPath = file.getAssetPath();
+      const filePath = assetPath || this.getAssetPathForFile(file);
+      const fileName = file.getName();
+      this.pdfViewerService.openPdf(filePath, fileName);
+      this.windowService.createWindow(WindowIds.PDF_VIEWER);
+    }
+  }
+
+  private getAssetPathForFile(file: File): string {
+    const fileName = file.getName().toLowerCase();
+    return `documents/${fileName}`;
   }
 
   public setViewMode(mode: 'icons' | 'list' | 'details'): void {
@@ -102,8 +124,8 @@ export class MyComputerComponent {
 
   private sortItems(items: FileSystemEntity[]): FileSystemEntity[] {
     return items.sort((a, b) => {
-      let nameA = a instanceof Drive ? a.getName() : a.getName();
-      let nameB = b instanceof Drive ? b.getName() : b.getName();
+      const nameA = a instanceof Drive ? a.getName() : a.getName();
+      const nameB = b instanceof Drive ? b.getName() : b.getName();
       let comparison = 0;
 
       switch (this.sortBy()) {
@@ -114,14 +136,18 @@ export class MyComputerComponent {
           comparison = this.getItemType(a).localeCompare(this.getItemType(b));
           break;
         case 'size':
-          const sizeA = a instanceof File ? a.getSize() : 0;
-          const sizeB = b instanceof File ? b.getSize() : 0;
-          comparison = sizeA - sizeB;
+          {
+            const sizeA = a instanceof File ? a.getSize() : 0;
+            const sizeB = b instanceof File ? b.getSize() : 0;
+            comparison = sizeA - sizeB;
+          }
           break;
         case 'date':
-          const dateA = a instanceof File ? a.getDateModified() : new Date();
-          const dateB = b instanceof File ? b.getDateModified() : new Date();
-          comparison = dateA.getTime() - dateB.getTime();
+          {
+            const dateA = a instanceof File ? a.getDateModified() : new Date();
+            const dateB = b instanceof File ? b.getDateModified() : new Date();
+            comparison = dateA.getTime() - dateB.getTime();
+          }
           break;
       }
 

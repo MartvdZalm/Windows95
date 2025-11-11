@@ -249,6 +249,14 @@ export class FileSystemService {
         .setSize(1024)
         .setAttributes({ hidden: false })
     );
+    documentsFolder.addFile(
+      new File()
+        .setName('CV.pdf')
+        .setSize(102400)
+        .setAttributes({ hidden: false })
+        .setAssetPath('documents/cv.pdf')
+        .setDateModified(new Date())
+    );
     windowsFolder.addSubfolder(documentsFolder);
 
     root.addSubfolder(windowsFolder);

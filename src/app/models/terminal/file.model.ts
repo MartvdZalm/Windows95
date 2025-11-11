@@ -17,6 +17,7 @@ export class File {
   private dateModified: Date = new Date();
   private dateAccessed: Date = new Date();
   private attributes: FileAttributes = {};
+  private assetPath?: string;
 
   public setName(name: string): this {
     this.name = name;
@@ -107,6 +108,15 @@ export class File {
 
   public getAttributes(): FileAttributes {
     return this.attributes;
+  }
+
+  public setAssetPath(assetPath: string): this {
+    this.assetPath = assetPath;
+    return this;
+  }
+
+  public getAssetPath(): string | undefined {
+    return this.assetPath;
   }
 
   public getFileInfo(): {

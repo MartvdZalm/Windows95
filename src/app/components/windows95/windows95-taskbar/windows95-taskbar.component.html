@@ -26,7 +26,9 @@
     tabindex="0"
     role="button"
   >
+    @if (item.icon) {
     <img class="taskbar__item-icon" [src]="item.icon" [alt]="item.title" />
+    }
     <span class="taskbar__item-text">{{ item.title }}</span>
   </div>
   }

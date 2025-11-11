@@ -7,4 +7,26 @@
   flex-wrap: wrap;
   height: 100vh;
   padding-bottom: $windows95-taskbar-height;
+
+  &__shortcut {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    margin: 10px;
+    cursor: pointer;
+
+    &__icon {
+      height: 70%;
+      cursor: pointer;
+    }
+
+    &__name {
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+  }
 }

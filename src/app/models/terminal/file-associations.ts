@@ -20,6 +20,10 @@ export const FILE_ASSOCIATIONS: Record<string, FileAssociation> = {
     type: 'TrueType Font',
     icon: 'images/windows95/extensions/font.ico',
   },
+  pdf: {
+    type: 'PDF Document',
+    icon: 'images/windows95/extensions/file.ico',
+  },
   default: {
     type: 'File',
     icon: 'images/windows95/extensions/file.ico',

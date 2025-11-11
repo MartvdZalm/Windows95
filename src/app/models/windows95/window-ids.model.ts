@@ -5,4 +5,5 @@ export enum WindowIds {
   NOTEPAD = 'notepad',
   SHUTDOWN = 'shutdown',
   WELCOME = 'welcome',
+  PDF_VIEWER = 'pdf-viewer',
 }

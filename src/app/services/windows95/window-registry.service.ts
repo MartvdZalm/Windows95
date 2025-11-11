@@ -8,6 +8,7 @@ import { WindowIds } from '../../models/windows95/window-ids.model';
 import { NotepadComponent } from '../../components/windows95/windows95-applications/notepad/notepad.component';
 import { ShutdownComponent } from '../../components/windows95/windows95-dialogs/shutdown/shutdown.component';
 import { WelcomeComponent } from '../../components/windows95/windows95-dialogs/welcome/welcome.component';
+import { PdfViewerComponent } from '../../components/windows95/windows95-applications/pdf-viewer/pdf-viewer.component';
 
 @Injectable({
   providedIn: 'root',
@@ -84,6 +85,18 @@ export class WindowRegistryService {
         type: WindowType.DIALOG,
         defaultWidth: 650,
         defaultHeight: 450,
+      },
+    ],
+    [
+      WindowIds.PDF_VIEWER,
+      {
+        id: WindowIds.PDF_VIEWER,
+        title: 'PDF Viewer',
+        icon: 'images/windows95/extensions/file.ico',
+        component: PdfViewerComponent,
+        type: WindowType.APPLICATION,
+        defaultWidth: 900,
+        defaultHeight: 700,
       },
     ],
   ]);

@@ -1,10 +1,9 @@
 <section class="desktop">
   @for (shortcut of shortcuts; track $index) {
-  <app-windows95-desktop-shortcut
-    [icon]="shortcut.icon"
-    [name]="shortcut.name"
-    [window]="shortcut.window"
-  />
+  <div class="desktop__shortcut" (dblclick)="openShortcut(shortcut.window)">
+    <img class="desktop__shortcut__icon" [src]="shortcut.icon" [alt]="shortcut.name" />
+    <span class="desktop__shortcut__name">{{ shortcut.name }}</span>
+  </div>
   } @for (window of windowService.windowsList(); track window.instanceId) { @if
   (!window.minimized) {
   <app-windows95-window [windowId]="window.instanceId">
@@ -20,6 +19,8 @@
     <app-shutdown />
     } @case ('welcome') {
     <app-welcome />
+    } @case ('pdf-viewer') {
+    <app-pdf-viewer />
     } }
   </app-windows95-window>
   } }

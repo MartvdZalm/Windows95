@@ -1,0 +1,15 @@
+<article class="pdf-viewer">
+  <div class="pdf-viewer__container">
+    @if (pdfPath()) {
+    <iframe
+      [src]="pdfUrl()"
+      class="pdf-viewer__iframe"
+      title="PDF Viewer"
+    ></iframe>
+    } @else {
+    <div class="pdf-viewer__empty">
+      <p>No document opened</p>
+    </div>
+    }
+  </div>
+</article>

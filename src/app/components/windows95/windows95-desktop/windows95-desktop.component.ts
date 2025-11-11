@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Windows95DesktopShortcutComponent } from './windows95-desktop-shortcut/windows95-desktop-shortcut.component';
 import { WindowService } from '../../../services/windows95/window.service';
 import { WindowIds } from '../../../models/windows95/window-ids.model';
 import { Windows95WindowComponent } from '../windows95-window/windows95-window.component';
@@ -9,12 +8,13 @@ import { RecycleBinComponent } from '../windows95-applications/recycle-bin/recyc
 import { NotepadComponent } from '../windows95-applications/notepad/notepad.component';
 import { ShutdownComponent } from '../windows95-dialogs/shutdown/shutdown.component';
 import { WelcomeComponent } from '../windows95-dialogs/welcome/welcome.component';
+import { PdfViewerComponent } from '../windows95-applications/pdf-viewer/pdf-viewer.component';
 import { CookieService } from 'ngx-cookie-service';
+import { PdfViewerService } from '../../../services/windows95/windows95-applications/pdf-viewer/pdf-viewer.service';
 
 @Component({
   selector: 'app-windows95-desktop',
   imports: [
-    Windows95DesktopShortcutComponent,
     Windows95WindowComponent,
     InternetExplorerComponent,
     MyComputerComponent,
@@ -22,6 +22,7 @@ import { CookieService } from 'ngx-cookie-service';
     NotepadComponent,
     ShutdownComponent,
     WelcomeComponent,
+    PdfViewerComponent,
   ],
   templateUrl: './windows95-desktop.component.html',
   styleUrl: './windows95-desktop.component.scss',
@@ -29,6 +30,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class Windows95DesktopComponent implements OnInit {
   private cookieService = inject(CookieService);
   public windowService = inject(WindowService);
+  private pdfViewerService = inject(PdfViewerService);
   public shortcuts = [
     {
       name: 'My Computer',
@@ -53,9 +55,24 @@ export class Windows95DesktopComponent implements OnInit {
     {
       name: 'Notepad',
       icon: 'images/windows95/windows95-notepad.ico',
-      window: 'notepad',
+      // window: 'notepad',
+      window: '',
+    },
+    {
+      name: 'CV',
+      icon: 'images/windows95/extensions/file.ico',
+      window: 'cv',
     },
   ];
+
+  public openShortcut(window: string): void {
+    if (window === 'cv') {
+      this.pdfViewerService.openPdf('documents/cv.pdf', 'CV.pdf');
+      this.windowService.createWindow(WindowIds.PDF_VIEWER);
+    } else if (window) {
+      this.windowService.createWindow(window);
+    }
+  }
 
   public ngOnInit(): void {
     const hideWelcome = this.cookieService.get('hideWelcome');

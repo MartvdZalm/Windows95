@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Windows95TaskbarStartMenuComponent } from './windows95-taskbar-start-menu/windows95-taskbar-start-menu.component';
 import { TaskbarService } from '../../../services/windows95/taskbar.service';
 import { WindowService } from '../../../services/windows95/window.service';
@@ -9,14 +9,14 @@ import { WindowService } from '../../../services/windows95/window.service';
   templateUrl: './windows95-taskbar.component.html',
   styleUrl: './windows95-taskbar.component.scss',
 })
-export class Windows95TaskbarComponent implements OnInit {
+export class Windows95TaskbarComponent implements OnInit, OnDestroy {
   public taskbarService = inject(TaskbarService);
   public windowService = inject(WindowService);
   public startMenuOpen = false;
-  public currentTime: string = '';
+  public currentTime = '';
   private timeIntervalId: number | undefined;
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.updateTime();
     this.timeIntervalId = window.setInterval(() => this.updateTime(), 1000);
   }
@@ -27,7 +27,7 @@ export class Windows95TaskbarComponent implements OnInit {
     }
   }
 
-  private updateTime() {
+  private updateTime(): void {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
