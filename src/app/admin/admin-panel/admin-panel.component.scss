@@ -1,0 +1,101 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/variables" as *;
+
+.admin-panel {
+  font-family: $windows95-font-family;
+  min-height: 100vh;
+  background: $windows95-desktop-background-color;
+  padding: 16px;
+}
+
+.window {
+  width: min(900px, 100%);
+  margin: 0 auto;
+  background: $windows95-gray-color;
+  @include windows95-border(white, white, black, black, 2px, 3px);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+}
+
+.window__header {
+  background: #000082;
+  color: #fff;
+  position: sticky;
+  top: 0;
+
+  &__title {
+    padding: 6px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__title-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.window__section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid #9c9c9c;
+
+  h3 {
+    margin: 0 0 4px;
+    color: #000080;
+    font-size: 14px;
+  }
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 120px auto;
+  gap: 8px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px solid;
+  border-color: #fff #808080 #808080 #fff;
+  padding: 8px;
+  background: #efefef;
+}
+
+input,
+textarea {
+  font-family: $windows95-font-family;
+  font-size: 12px;
+  border: 2px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 4px 6px;
+}
+
+button {
+  @include windows95-button;
+  width: fit-content;
+}
+
+.actions {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}

@@ -53,10 +53,9 @@ export class Windows95DesktopComponent implements OnInit {
       window: 'recycle-bin',
     },
     {
-      name: 'Notepad',
+      name: 'Mart van der Zalm',
       icon: 'images/windows95/windows95-notepad.ico',
-      // window: 'notepad',
-      window: '',
+      window: 'notepad',
     },
     {
       name: 'CV',

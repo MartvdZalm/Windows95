@@ -1,174 +1,114 @@
 <article class="notepad">
   <section class="notepad__content">
-    <section class="notepad__content__section">
-      <img src="images/portfolio-image.jpg" alt="Mart van der Zalm" />
-    </section>
+    @if (resumeContent(); as content) {
+      <section class="notepad__content__section">
+        <img [src]="content.profileImageUrl" [alt]="content.profileImageAlt" />
+      </section>
 
-    <section class="notepad__content__section">
-      <h3>About Me</h3>
-      <div class="notepad__content__underline"></div>
-      <p>
-        My programming journey began at 14 when I decided to build my first
-        website using just HTML, CSS, and JavaScript. On my 15th birthday, I got
-        the book "Java: The Complete Reference (Twelfth Edition).". From that
-        moment on, programming wasn't just a hobby, it became an obsession.
-        Currently working at Superscanner as a Software Developer, where I build
-        and maintain crawlers that collect data from retail platforms.
-        Continuously exploring new technologies to deepen my technical
-        expertise.
-      </p>
-    </section>
+      <section class="notepad__content__section">
+        <h3>About Me</h3>
+        <div class="notepad__content__underline"></div>
+        <p>{{ content.aboutMe }}</p>
+      </section>
 
-    <section class="notepad__content__section">
-      <h3>Hobbies</h3>
-      <div class="notepad__content__underline"></div>
-      <ul>
-        <li>Programming Addict</li>
-        <li>Japanese language</li>
-        <li>Calisthenics</li>
-      </ul>
-    </section>
+      <section class="notepad__content__section">
+        <h3>Hobbies</h3>
+        <div class="notepad__content__underline"></div>
+        <ul>
+          @for (hobby of content.hobbies; track $index) {
+            <li>{{ hobby }}</li>
+          }
+        </ul>
+      </section>
 
-    <section class="notepad__content__section">
-      <h3>Skills</h3>
-      <div class="notepad__content__underline"></div>
+      <section class="notepad__content__section">
+        <h3>Skills</h3>
+        <div class="notepad__content__underline"></div>
+        @for (skill of content.skills; track skill.name + $index) {
+          <div class="notepad__content__section__skill">
+            <strong>{{ skill.name }}</strong>
+            <div class="notepad__content__section__skill__bar">
+              <div [style.width.%]="skill.level"></div>
+            </div>
+          </div>
+        }
+      </section>
 
-      <div class="notepad__content__section__skill">
-        <strong>Java</strong>
-        <div class="notepad__content__section__skill__bar">
-          <div style="width: 90%"></div>
-        </div>
-      </div>
+      <section class="notepad__content__section">
+        <h3>Work Experience</h3>
+        <div class="notepad__content__underline"></div>
+        @for (
+          experience of content.workExperience;
+          track experience.title + $index
+        ) {
+          <div class="experience">
+            <img [src]="experience.imageUrl" [alt]="experience.title" />
+            <div class="details">
+              <h4>{{ experience.title }}</h4>
+              <p class="year">{{ experience.period }}</p>
+              <p>{{ experience.description }}</p>
+            </div>
+          </div>
+        }
+      </section>
 
-      <div class="notepad__content__section__skill">
-        <strong>C++</strong>
-        <div class="notepad__content__section__skill__bar">
-          <div style="width: 70%"></div>
-        </div>
-      </div>
+      @if (content.projects.length !== 0) {
+        <section class="notepad__content__section">
+          <h3>Projects</h3>
+          <div class="notepad__content__underline"></div>
+          @for (project of content.projects; track project.title + $index) {
+            <div class="degree">
+              <div class="details">
+                <h4>{{ project.title }}</h4>
+                <p>{{ project.description }}</p>
+              </div>
+            </div>
+          }
+        </section>
+      }
 
-      <div class="notepad__content__section__skill">
-        <strong>PHP</strong>
-        <div class="notepad__content__section__skill__bar">
-          <div style="width: 75%"></div>
-        </div>
-      </div>
+      <section class="notepad__content__section">
+        <h3>Education</h3>
+        <div class="notepad__content__underline"></div>
+        @for (education of content.education; track education.title + $index) {
+          <div class="degree">
+            <img [src]="education.imageUrl" [alt]="education.title" />
+            <div class="details">
+              <h4>{{ education.title }}</h4>
+              <p class="year">{{ education.period }}</p>
+              <p>{{ education.description }}</p>
+            </div>
+          </div>
+        }
+      </section>
 
-      <div class="notepad__content__section__skill">
-        <strong>Angular</strong>
-        <div class="notepad__content__section__skill__bar">
-          <div style="width: 60%"></div>
-        </div>
-      </div>
+      <section class="notepad__content__section">
+        <h3>Languages</h3>
+        <div class="notepad__content__underline"></div>
+        @for (language of content.languages; track language.name + $index) {
+          <div class="notepad__content__section__skill">
+            <strong>{{ language.name }}</strong>
+            <div class="notepad__content__section__skill__bar">
+              <div [style.width.%]="language.level"></div>
+            </div>
+          </div>
+        }
+      </section>
 
-      <div class="notepad__content__section__skill">
-        <strong>Laravel</strong>
-        <div class="notepad__content__section__skill__bar">
-          <div style="width: 75%"></div>
-        </div>
-      </div>
-
-      <div class="notepad__content__section__skill">
-        <strong>Vue</strong>
-        <div class="notepad__content__section__skill__bar">
-          <div style="width: 30%"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="notepad__content__section">
-      <h3>Work Experience</h3>
-      <div class="notepad__content__underline"></div>
-
-      <div class="experience">
-        <img src="images/Superscanner.png" alt="" />
-        <div class="details">
-          <h4>Superscanner – Software Developer</h4>
-          <p class="year">2023 - Present</p>
-          <p>
-            I build and maintain web crawlers that extract data from
-            supermarkets.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="notepad__content__section">
-      <h3>Education</h3>
-      <div class="notepad__content__underline"></div>
-
-      <div class="degree">
-        <img src="images/Hogeschool-Leiden.png" alt="" />
-
-        <div class="details">
-          <h4>Hogeschool Leiden – Informatica BSc</h4>
-          <p class="year">2024 - Present</p>
-          <p>
-            I am currently studying Informatica at Hogeschool Leiden. Thanks to
-            my prior programming experience, I find it easy.
-          </p>
-        </div>
-      </div>
-
-      <div class="degree">
-        <img src="images/Nova-College.png" alt="" />
-        <div class="details">
-          <h4>Nova College Haarlem – Software Developer</h4>
-          <p class="year">2022 - 2023</p>
-          <p>
-            This program typically takes three years to complete, but I finished
-            it in just one year.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="notepad__content__section">
-      <h3>Languages</h3>
-      <div class="notepad__content__underline"></div>
-
-      <div class="notepad__content__section__skill">
-        <strong>Dutch</strong>
-        <div class="notepad__content__section__skill__bar">
-          <div style="width: 100%"></div>
-        </div>
-      </div>
-
-      <div class="notepad__content__section__skill">
-        <strong>English</strong>
-        <div class="notepad__content__section__skill__bar">
-          <div style="width: 80%"></div>
-        </div>
-      </div>
-
-      <div class="notepad__content__section__skill">
-        <strong>Japanese</strong>
-        <div class="notepad__content__section__skill__bar">
-          <div style="width: 25%"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="notepad__content__section">
-      <h3>Links</h3>
-      <div class="notepad__content__underline"></div>
-
-      <ul>
-        <li>
-          <strong>GitHub: </strong>
-          <a href="https://github.com/MartvdZalm" target="_blank"
-            >Where my code lives.</a
-          >
-        </li>
-        <li>
-          <strong>LinkedIn: </strong>
-          <a
-            href="https://linkedin.com/in/mart-van-der-zalm-06a9a0274"
-            target="_blank"
-            >Feel free to connect!</a
-          >
-        </li>
-      </ul>
-    </section>
+      <section class="notepad__content__section">
+        <h3>Links</h3>
+        <div class="notepad__content__underline"></div>
+        <ul>
+          @for (link of content.links; track link.url + $index) {
+            <li>
+              <strong>{{ link.label }}: </strong>
+              <a [href]="link.url" target="_blank" rel="noopener noreferrer">
+                {{ link.description }}
+              </a>
+            </li>
+          }
+        </ul>
+      </section>
+    }
   </section>
 </article>
