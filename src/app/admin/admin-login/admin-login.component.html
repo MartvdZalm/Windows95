@@ -1,0 +1,51 @@
+<main class="admin-login">
+  <section class="window">
+    <header class="window__header">
+      <div class="window__header__title">
+        <span class="window__header__title-item">
+          <img
+            class="window__header__icon"
+            src="images/windows95/windows95-start.ico"
+          />
+          Windows 95 Login
+        </span>
+      </div>
+    </header>
+
+    <section class="window__section">
+      <div class="window__section__form">
+        <label class="window__section__label">
+          Email
+          <input
+            class="window__section__input"
+            type="email"
+            autocomplete="username"
+            [(ngModel)]="emailInput"
+            [disabled]="isSigningIn"
+          />
+        </label>
+
+        <label class="window__section__label">
+          Password
+          <input
+            class="window__section__input"
+            type="password"
+            autocomplete="current-password"
+            [(ngModel)]="passwordInput"
+            [disabled]="isSigningIn"
+          />
+        </label>
+      </div>
+
+      <div class="window__section__actions">
+        <button type="button" (click)="login()" [disabled]="isSigningIn">
+          @if (isSigningIn) {
+            Signing in...
+          } @else {
+            Sign in
+          }
+        </button>
+      </div>
+    </section>
+  </section>
+</main>

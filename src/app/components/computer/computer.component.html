@@ -1,18 +1,20 @@
 <section id="ibm">
   <div class="ibm__frame">
-    <div class="ibm__frame__screen">
-      <div id="ibm__frame__terminal" [class.off]="!power">
-        @if (showStartupImage) {
-        <img src="images/ibm-startup-screen.png" alt="IBM Startup Screen" />
-        } @if (showTerminal) {
-        <app-terminal />
-        }
+    <div class="ibm__frame__body">
+      <div class="ibm__frame__screen">
+        <div id="ibm__frame__terminal" [class.off]="!power">
+          @if (showStartupImage) {
+          <img src="images/ibm-startup-screen.png" alt="IBM Startup Screen" />
+          } @if (showTerminal) {
+          <app-terminal />
+          }
+        </div>
       </div>
     </div>
     <div class="ibm__frame--lower">
       <p>|||||||||</p>
       <div class="ibm__frame--logo">
-        <img src="images/ibm-logo.png" alt="IBM logo" height="35px" />
+        <img src="images/ibm-logo.png" alt="IBM logo" />
       </div>
       <div class="ibm-frame-on-off-button">
         <div

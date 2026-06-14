@@ -1,0 +1,221 @@
+<main class="admin-panel">
+  <section class="window">
+    <header class="window__header">
+      <div class="window__header__title">
+        <span class="window__header__title-item">
+          <img
+            class="window__header__icon"
+            src="images/windows95/windows95-start.ico"
+          />
+          Admin Panel
+        </span>
+        <button type="button" (click)="goBack()">Desktop</button>
+        <button type="button" (click)="logout()">Logout</button>
+      </div>
+    </header>
+
+    <section class="window__section">
+      <h3>General</h3>
+      <label>
+        Profile image URL
+        <input [(ngModel)]="resumeContent.profileImageUrl" />
+      </label>
+      <label>
+        Profile image alt text
+        <input [(ngModel)]="resumeContent.profileImageAlt" />
+      </label>
+      <label>
+        About me
+        <textarea rows="4" [(ngModel)]="resumeContent.aboutMe"></textarea>
+      </label>
+    </section>
+
+    <section class="window__section">
+      <h3>Hobbies</h3>
+      @for (hobby of resumeContent.hobbies; track $index) {
+        <div class="row">
+          <input [(ngModel)]="resumeContent.hobbies[$index]" />
+          <button type="button" (click)="removeByIndex('hobbies', $index)">
+            Remove
+          </button>
+        </div>
+      }
+      <button type="button" (click)="addHobby()">Add hobby</button>
+    </section>
+
+    <section class="window__section">
+      <h3>Skills</h3>
+      @for (skill of resumeContent.skills; track $index) {
+        <div class="row">
+          <input
+            placeholder="Skill name"
+            [(ngModel)]="resumeContent.skills[$index].name"
+          />
+          <input
+            type="number"
+            min="0"
+            max="100"
+            placeholder="0-100"
+            [(ngModel)]="resumeContent.skills[$index].level"
+          />
+          <button type="button" (click)="removeByIndex('skills', $index)">
+            Remove
+          </button>
+        </div>
+      }
+      <button type="button" (click)="addSkill('skills')">Add skill</button>
+    </section>
+
+    <section class="window__section">
+      <h3>Work experience</h3>
+      @for (item of resumeContent.workExperience; track $index) {
+        <div class="group">
+          <label>
+            Title
+            <input [(ngModel)]="resumeContent.workExperience[$index].title" />
+          </label>
+          <label>
+            Period
+            <input [(ngModel)]="resumeContent.workExperience[$index].period" />
+          </label>
+          <label>
+            Description
+            <textarea
+              rows="3"
+              [(ngModel)]="resumeContent.workExperience[$index].description"
+            ></textarea>
+          </label>
+          <label>
+            Image URL
+            <input
+              [(ngModel)]="resumeContent.workExperience[$index].imageUrl"
+            />
+          </label>
+          <button
+            type="button"
+            (click)="removeByIndex('workExperience', $index)"
+          >
+            Remove
+          </button>
+        </div>
+      }
+      <button type="button" (click)="addExperience()">Add experience</button>
+    </section>
+
+    <section class="window__section">
+      <h3>Projects</h3>
+      @for (project of resumeContent.projects; track $index) {
+        <div class="group">
+          <label>
+            Title
+            <input [(ngModel)]="resumeContent.projects[$index].title" />
+          </label>
+          <label>
+            Description
+            <textarea
+              rows="3"
+              [(ngModel)]="resumeContent.projects[$index].description"
+            ></textarea>
+          </label>
+          <button type="button" (click)="removeByIndex('projects', $index)">
+            Remove
+          </button>
+        </div>
+      }
+      <button type="button" (click)="addProject()">Add project</button>
+    </section>
+
+    <section class="window__section">
+      <h3>Education</h3>
+      @for (item of resumeContent.education; track $index) {
+        <div class="group">
+          <label>
+            Title
+            <input [(ngModel)]="resumeContent.education[$index].title" />
+          </label>
+          <label>
+            Period
+            <input [(ngModel)]="resumeContent.education[$index].period" />
+          </label>
+          <label>
+            Description
+            <textarea
+              rows="3"
+              [(ngModel)]="resumeContent.education[$index].description"
+            ></textarea>
+          </label>
+          <label>
+            Image URL
+            <input [(ngModel)]="resumeContent.education[$index].imageUrl" />
+          </label>
+          <button type="button" (click)="removeByIndex('education', $index)">
+            Remove
+          </button>
+        </div>
+      }
+      <button type="button" (click)="addEducation()">Add education</button>
+    </section>
+
+    <section class="window__section">
+      <h3>Languages</h3>
+      @for (language of resumeContent.languages; track $index) {
+        <div class="row">
+          <input
+            placeholder="Language"
+            [(ngModel)]="resumeContent.languages[$index].name"
+          />
+          <input
+            type="number"
+            min="0"
+            max="100"
+            placeholder="0-100"
+            [(ngModel)]="resumeContent.languages[$index].level"
+          />
+          <button type="button" (click)="removeByIndex('languages', $index)">
+            Remove
+          </button>
+        </div>
+      }
+      <button type="button" (click)="addSkill('languages')">
+        Add language
+      </button>
+    </section>
+
+    <section class="window__section">
+      <h3>Links</h3>
+      @for (link of resumeContent.links; track $index) {
+        <div class="group">
+          <label>
+            Label
+            <input [(ngModel)]="resumeContent.links[$index].label" />
+          </label>
+          <label>
+            URL
+            <input [(ngModel)]="resumeContent.links[$index].url" />
+          </label>
+          <label>
+            Description
+            <input [(ngModel)]="resumeContent.links[$index].description" />
+          </label>
+          <button type="button" (click)="removeByIndex('links', $index)">
+            Remove
+          </button>
+        </div>
+      }
+      <button type="button" (click)="addLink()">Add link</button>
+    </section>
+
+    <section class="window__section actions">
+      <button type="button" (click)="save()" [disabled]="isSaving">
+        @if (isSaving) {
+          Saving...
+        } @else {
+          Save changes
+        }
+      </button>
+      @if (statusMessage) {
+        <span>{{ statusMessage }}</span>
+      }
+    </section>
+  </section>
+</main>

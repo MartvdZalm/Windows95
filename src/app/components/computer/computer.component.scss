@@ -5,30 +5,50 @@ section {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
   background-color: black;
   font-family: "IBM Courier" !important;
 
   .ibm__frame {
+    --frame-outer: 30px;
     background: #d3d3d3;
-    width: 900px;
-    height: 800px;
+    width: min(
+      calc(100dvh - var(--frame-outer) * 2),
+      calc(100vw - var(--frame-outer) * 2)
+    );
+    height: min(
+      calc(100dvh - var(--frame-outer) * 2),
+      calc(100vw - var(--frame-outer) * 2)
+    );
     border: 5px solid #3d3b3b;
     box-shadow: 0px 0px 0px 10px #b6b6b6;
     border-radius: 5px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    transition: width 0.5s ease, height 0.5s ease, border-radius 0.5s ease,
+    container-type: size;
+    overflow: visible;
+    transition:
+      border-radius 0.5s ease,
       box-shadow 0.5s ease;
 
+    .ibm__frame__body {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      padding: 4.375%;
+    }
+
     .ibm__frame__screen {
-      height: 600px;
-      margin: 35px 35px 0px 35px;
+      flex: 1;
+      min-height: 0;
+      width: 100%;
       border: 3px solid #222121;
       border-radius: 20px;
       box-shadow: inset 0px 0px 10px 10px #000;
-      transition: height 0.5s ease, margin 0.5s ease, border-radius 0.5s ease,
+      transition:
+        border-radius 0.5s ease,
         box-shadow 0.5s ease;
 
       #ibm__frame__terminal {
@@ -44,7 +64,7 @@ section {
         height: 100%;
         border-radius: 15px;
         font-family: "IBM Courier", monospace;
-        font-size: 17px;
+        font-size: clamp(12px, 2.1cqh, 17px);
         color: rgba(128, 255, 128, 0.8);
         position: relative;
 
@@ -63,9 +83,9 @@ section {
     }
 
     .ibm__frame--lower {
-      height: 80px;
+      flex: 0 0 10%;
       border-top: 5px solid #3d3b3b;
-      font-size: 62px;
+      font-size: 7.75cqh;
       font-weight: normal;
       font-family: Arial, sans-serif;
       display: flex;
@@ -73,24 +93,29 @@ section {
       align-items: center;
 
       p {
-        font-size: 50px;
+        font-size: 6.25cqh;
         color: #3d3b3b;
       }
 
       .ibm__frame--logo {
         display: flex;
         align-items: center;
-        font-size: 35px;
+        font-size: 4.375cqh;
         height: 100%;
         margin: 0 auto;
+
+        img {
+          height: 4.375cqh;
+          width: auto;
+        }
       }
 
       .ibm-frame-on-off-button {
-        width: 50px;
-        height: 50px;
+        width: 6.25cqh;
+        height: 6.25cqh;
         border: 3px solid black;
         border-radius: 5px;
-        margin-right: 20px;
+        margin-right: 2.5cqh;
         display: flex;
         justify-content: center;
         align-items: center;

@@ -1,0 +1,163 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+@use "sass:color";
+
+.admin-login {
+  font-family: $windows95-font-family;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $windows95-desktop-background-color;
+}
+
+.window {
+  display: flex;
+  flex-direction: column;
+  background-color: $windows95-gray-color;
+  resize: none;
+  overflow: hidden;
+  width: 350px;
+
+  @include windows95-border(white, white, black, black, 2px, 3px);
+
+  .window__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #000082;
+    height: fit-content;
+
+    .window__header__title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 30px;
+      color: white;
+
+      .window__header__icon {
+        height: 20px;
+        margin: 0 5px;
+      }
+
+      .window__header__title-item {
+        display: flex;
+        align-items: center;
+      }
+
+      .window__close__btn,
+      .window__minimize__btn,
+      .window__maximize__btn {
+        cursor: pointer;
+        background-color: $windows95-gray-color;
+        @include windows95-border(white, white, black, black);
+        color: black;
+        position: relative;
+        transition:
+          top 0.1s ease,
+          left 0.1s ease;
+        width: 25px;
+        margin: 1px;
+
+        .material-icons {
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+
+        &:active {
+          @include windows95-border(black, black, white, white, 3px, 2px);
+        }
+
+        &:hover {
+          background-color: color.adjust(
+            $windows95-gray-color,
+            $lightness: -10%
+          );
+        }
+      }
+    }
+
+    .window__header__menu {
+      width: 100%;
+      background-color: #c0c0c0;
+      padding: 5px;
+
+      .window__header__menu-item {
+        margin-right: 10px;
+        cursor: pointer;
+        color: black;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .window__section {
+    padding: 16px;
+    background-color: $windows95-gray-color;
+    font-family: $windows95-font-family;
+    font-size: 12px;
+    color: #000;
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    &__label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    &__input {
+      font-family: $windows95-font-family;
+      font-size: 12px;
+
+      height: 24px;
+      padding: 2px 6px;
+
+      background: #fff;
+      color: #000;
+
+      border: 2px solid;
+      border-color: #808080 #ffffff #ffffff #808080;
+
+      outline: none;
+
+      box-shadow:
+        inset -1px -1px 0 #dfdfdf,
+        inset 1px 1px 0 #000;
+
+      &:focus {
+        border-color: #000;
+      }
+
+      &:disabled {
+        background: #c0c0c0;
+        color: #666;
+        cursor: not-allowed;
+      }
+    }
+
+    &__actions {
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        @include windows95-button;
+      }
+    }
+  }
+}
