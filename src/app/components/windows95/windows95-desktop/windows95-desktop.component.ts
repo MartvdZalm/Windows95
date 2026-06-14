@@ -9,6 +9,7 @@ import { NotepadComponent } from '../windows95-applications/notepad/notepad.comp
 import { ShutdownComponent } from '../windows95-dialogs/shutdown/shutdown.component';
 import { WelcomeComponent } from '../windows95-dialogs/welcome/welcome.component';
 import { PdfViewerComponent } from '../windows95-applications/pdf-viewer/pdf-viewer.component';
+import { KnightCompilerComponent } from '../windows95-applications/knight-compiler/knight-compiler.component';
 import { CookieService } from 'ngx-cookie-service';
 import { PdfViewerService } from '../../../services/windows95/windows95-applications/pdf-viewer/pdf-viewer.service';
 
@@ -23,6 +24,7 @@ import { PdfViewerService } from '../../../services/windows95/windows95-applicat
     ShutdownComponent,
     WelcomeComponent,
     PdfViewerComponent,
+    KnightCompilerComponent,
   ],
   templateUrl: './windows95-desktop.component.html',
   styleUrl: './windows95-desktop.component.scss',
@@ -62,6 +64,11 @@ export class Windows95DesktopComponent implements OnInit {
       name: 'CV',
       icon: 'images/windows95/extensions/file.ico',
       window: 'cv',
+    },
+    {
+      name: 'Knight',
+      icon: 'images/windows95/windows95-programs.ico',
+      window: WindowIds.KNIGHT_COMPILER,
     },
   ];
 

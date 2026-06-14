@@ -9,6 +9,7 @@ import { NotepadComponent } from '../../components/windows95/windows95-applicati
 import { ShutdownComponent } from '../../components/windows95/windows95-dialogs/shutdown/shutdown.component';
 import { WelcomeComponent } from '../../components/windows95/windows95-dialogs/welcome/welcome.component';
 import { PdfViewerComponent } from '../../components/windows95/windows95-applications/pdf-viewer/pdf-viewer.component';
+import { KnightCompilerComponent } from '../../components/windows95/windows95-applications/knight-compiler/knight-compiler.component';
 
 @Injectable({
   providedIn: 'root',
@@ -97,6 +98,18 @@ export class WindowRegistryService {
         type: WindowType.APPLICATION,
         defaultWidth: 900,
         defaultHeight: 700,
+      },
+    ],
+    [
+      WindowIds.KNIGHT_COMPILER,
+      {
+        id: WindowIds.KNIGHT_COMPILER,
+        title: 'Knight Compiler',
+        icon: 'images/windows95/windows95-programs.ico',
+        component: KnightCompilerComponent,
+        type: WindowType.APPLICATION,
+        defaultWidth: 960,
+        defaultHeight: 720,
       },
     ],
   ]);

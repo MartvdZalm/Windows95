@@ -6,4 +6,5 @@ export enum WindowIds {
   SHUTDOWN = 'shutdown',
   WELCOME = 'welcome',
   PDF_VIEWER = 'pdf-viewer',
+  KNIGHT_COMPILER = 'knight-compiler',
 }
