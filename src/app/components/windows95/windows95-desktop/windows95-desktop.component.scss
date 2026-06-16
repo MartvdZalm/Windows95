@@ -7,6 +7,7 @@
   flex-wrap: wrap;
   height: 100vh;
   padding-bottom: $windows95-taskbar-height;
+  align-content: flex-start;
 
   &__shortcut {
     width: 80px;
