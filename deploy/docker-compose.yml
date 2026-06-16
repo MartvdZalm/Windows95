@@ -38,7 +38,7 @@ services:
       - web
 
   knight:
-    image: ${KNIGHT_IMAGE:-ghcr.io/martvdzalm/knight:latest}
+    image: ${KNIGHT_IMAGE:-martvdzalm/knight:latest}
     container_name: knight
     restart: unless-stopped
     environment:
