@@ -23,7 +23,7 @@ pull:
 	$(COMPOSE) pull
 
 up:
-	$(COMPOSE) up -d
+	$(COMPOSE) up -d --no-recreate
 
 down:
 	$(COMPOSE) down

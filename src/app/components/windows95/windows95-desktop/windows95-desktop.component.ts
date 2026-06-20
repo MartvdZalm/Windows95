@@ -12,6 +12,7 @@ import { PdfViewerComponent } from '../windows95-applications/pdf-viewer/pdf-vie
 import { KnightCompilerComponent } from '../windows95-applications/knight-compiler/knight-compiler.component';
 import { CookieService } from 'ngx-cookie-service';
 import { PdfViewerService } from '../../../services/windows95/windows95-applications/pdf-viewer/pdf-viewer.service';
+import { TetrisComponent } from '../windows95-applications/tetris/tetris.component';
 
 @Component({
   selector: 'app-windows95-desktop',
@@ -25,6 +26,7 @@ import { PdfViewerService } from '../../../services/windows95/windows95-applicat
     WelcomeComponent,
     PdfViewerComponent,
     KnightCompilerComponent,
+    TetrisComponent,
   ],
   templateUrl: './windows95-desktop.component.html',
   styleUrl: './windows95-desktop.component.scss',
@@ -68,6 +70,11 @@ export class Windows95DesktopComponent implements OnInit {
       name: 'Knight',
       icon: 'images/windows95/windows95-programs.ico',
       window: WindowIds.KNIGHT_COMPILER,
+    },
+    {
+      name: 'Tetris',
+      icon: 'images/windows95/windows95-programs.ico',
+      window: WindowIds.TETRIS,
     },
   ];
 

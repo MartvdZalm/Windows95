@@ -10,6 +10,7 @@ import { ShutdownComponent } from '../../components/windows95/windows95-dialogs/
 import { WelcomeComponent } from '../../components/windows95/windows95-dialogs/welcome/welcome.component';
 import { PdfViewerComponent } from '../../components/windows95/windows95-applications/pdf-viewer/pdf-viewer.component';
 import { KnightCompilerComponent } from '../../components/windows95/windows95-applications/knight-compiler/knight-compiler.component';
+import { TetrisComponent } from '../../components/windows95/windows95-applications/tetris/tetris.component';
 
 @Injectable({
   providedIn: 'root',
@@ -107,6 +108,30 @@ export class WindowRegistryService {
         title: 'Knight Compiler',
         icon: 'images/windows95/windows95-programs.ico',
         component: KnightCompilerComponent,
+        type: WindowType.APPLICATION,
+        defaultWidth: 960,
+        defaultHeight: 720,
+      },
+    ],
+    [
+      WindowIds.KNIGHT_COMPILER,
+      {
+        id: WindowIds.KNIGHT_COMPILER,
+        title: 'Knight Compiler',
+        icon: 'images/windows95/windows95-programs.ico',
+        component: KnightCompilerComponent,
+        type: WindowType.APPLICATION,
+        defaultWidth: 960,
+        defaultHeight: 720,
+      },
+    ],
+    [
+      WindowIds.TETRIS,
+      {
+        id: WindowIds.TETRIS,
+        title: 'Tetris',
+        icon: 'images/windows95/windows95-programs.ico',
+        component: TetrisComponent,
         type: WindowType.APPLICATION,
         defaultWidth: 960,
         defaultHeight: 720,

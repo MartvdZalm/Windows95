@@ -7,4 +7,5 @@ export enum WindowIds {
   WELCOME = 'welcome',
   PDF_VIEWER = 'pdf-viewer',
   KNIGHT_COMPILER = 'knight-compiler',
+  TETRIS = 'tetris',
 }
