@@ -13,6 +13,8 @@ import { KnightCompilerComponent } from '../windows95-applications/knight-compil
 import { CookieService } from 'ngx-cookie-service';
 import { PdfViewerService } from '../../../services/windows95/windows95-applications/pdf-viewer/pdf-viewer.service';
 import { TetrisComponent } from '../windows95-applications/tetris/tetris.component';
+import { DevPilotComponent } from '../windows95-applications/dev-pilot/dev-pilot.component';
+import { TheLastRoninComponent } from '../windows95-applications/the-last-ronin/the-last-ronin.component';
 
 @Component({
   selector: 'app-windows95-desktop',
@@ -27,6 +29,8 @@ import { TetrisComponent } from '../windows95-applications/tetris/tetris.compone
     PdfViewerComponent,
     KnightCompilerComponent,
     TetrisComponent,
+    DevPilotComponent,
+    TheLastRoninComponent,
   ],
   templateUrl: './windows95-desktop.component.html',
   styleUrl: './windows95-desktop.component.scss',
@@ -75,6 +79,16 @@ export class Windows95DesktopComponent implements OnInit {
       name: 'Tetris',
       icon: 'images/windows95/windows95-programs.ico',
       window: WindowIds.TETRIS,
+    },
+    {
+      name: 'Dev Pilot',
+      icon: 'images/windows95/windows95-programs.ico',
+      window: WindowIds.DEV_PILOT,
+    },
+    {
+      name: 'The Last Ronin',
+      icon: 'images/windows95/windows95-programs.ico',
+      window: WindowIds.THE_LAST_RONIN,
     },
   ];
 

@@ -17,7 +17,7 @@
     top: 0px !important;
     left: 0px !important;
     width: 100% !important;
-    height: 100% !important;
+    height: calc(100% - $windows95-taskbar-height) !important;
   }
 
   .window__header {
@@ -54,7 +54,9 @@
         @include windows95-border(white, white, black, black);
         color: black;
         position: relative;
-        transition: top 0.1s ease, left 0.1s ease;
+        transition:
+          top 0.1s ease,
+          left 0.1s ease;
         width: 25px;
         margin: 1px;
 

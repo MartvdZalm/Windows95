@@ -11,6 +11,8 @@ import { WelcomeComponent } from '../../components/windows95/windows95-dialogs/w
 import { PdfViewerComponent } from '../../components/windows95/windows95-applications/pdf-viewer/pdf-viewer.component';
 import { KnightCompilerComponent } from '../../components/windows95/windows95-applications/knight-compiler/knight-compiler.component';
 import { TetrisComponent } from '../../components/windows95/windows95-applications/tetris/tetris.component';
+import { DevPilotComponent } from '../../components/windows95/windows95-applications/dev-pilot/dev-pilot.component';
+import { TheLastRoninComponent } from '../../components/windows95/windows95-applications/the-last-ronin/the-last-ronin.component';
 
 @Injectable({
   providedIn: 'root',
@@ -132,6 +134,30 @@ export class WindowRegistryService {
         title: 'Tetris',
         icon: 'images/windows95/windows95-programs.ico',
         component: TetrisComponent,
+        type: WindowType.APPLICATION,
+        defaultWidth: 960,
+        defaultHeight: 720,
+      },
+    ],
+    [
+      WindowIds.DEV_PILOT,
+      {
+        id: WindowIds.DEV_PILOT,
+        title: 'Dev Pilot',
+        icon: 'images/windows95/windows95-programs.ico',
+        component: DevPilotComponent,
+        type: WindowType.APPLICATION,
+        defaultWidth: 960,
+        defaultHeight: 720,
+      },
+    ],
+    [
+      WindowIds.THE_LAST_RONIN,
+      {
+        id: WindowIds.THE_LAST_RONIN,
+        title: 'The Last Ronin',
+        icon: 'images/windows95/windows95-programs.ico',
+        component: TheLastRoninComponent,
         type: WindowType.APPLICATION,
         defaultWidth: 960,
         defaultHeight: 720,

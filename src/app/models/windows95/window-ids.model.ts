@@ -8,4 +8,6 @@ export enum WindowIds {
   PDF_VIEWER = 'pdf-viewer',
   KNIGHT_COMPILER = 'knight-compiler',
   TETRIS = 'tetris',
+  DEV_PILOT = 'dev-pilot',
+  THE_LAST_RONIN = 'the-last-ronin',
 }
