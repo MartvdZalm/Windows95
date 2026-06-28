@@ -16,7 +16,7 @@ help:
 	@echo "  make ps             Show running containers"
 	@echo "  make logs           Follow all service logs"
 
-quick: pull up nginx-reload
+quick: pull up
 	@echo "Deploy complete."
 
 pull:

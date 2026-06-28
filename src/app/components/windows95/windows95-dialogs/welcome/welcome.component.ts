@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { WindowService } from '../../../../services/windows95/window.service';
 import { FormsModule } from '@angular/forms';
+import { WindowIds } from '../../../../models/windows95/window-ids.model';
 
 @Component({
   selector: 'app-welcome',
@@ -32,5 +33,9 @@ export class WelcomeComponent implements OnInit {
       this.cookieService.set('hideWelcome', 'true', expiryDate);
     }
     this.showWelcome = false;
+  }
+
+  public onCVClick(): void {
+    this.windowService.createWindow(WindowIds.NOTEPAD);
   }
 }
